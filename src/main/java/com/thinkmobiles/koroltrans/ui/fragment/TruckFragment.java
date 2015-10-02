@@ -41,15 +41,15 @@ public class TruckFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_truck,container,false);
 
-        TextView stavka = (TextView) root.findViewById(R.id.stavka);
-        TextView techPasSer = (TextView) root.findViewById(R.id.techPasSer);
-        TextView techPasNom = (TextView) root.findViewById(R.id.techPasNomer);
-        TextView oilKm = (TextView) root.findViewById(R.id.oilKM);
-        TextView oilData = (TextView) root.findViewById(R.id.oilDate);
-        TextView strachNom = (TextView) root.findViewById(R.id.strachNomer);
-        TextView strachDate = (TextView) root.findViewById(R.id.strachDate);
+//        TextView stavka = (TextView) root.findViewById(R.id.stavka);
+//        TextView techPasSer = (TextView) root.findViewById(R.id.techPasSer);
+//        TextView techPasNom = (TextView) root.findViewById(R.id.techPasNomer);
+//        TextView oilKm = (TextView) root.findViewById(R.id.oilKM);
+//        TextView oilData = (TextView) root.findViewById(R.id.oilDate);
+//        TextView strachNom = (TextView) root.findViewById(R.id.strachNomer);
+//        TextView strachDate = (TextView) root.findViewById(R.id.strachDate);
 
-       stavka.setText(truck.getId());
+//       stavka.setText(truck.getId());
 //        techPasSer.setText(truck.getTechPasSerie());
 //        techPasNom.setText(truck.getTechPasNomer());
 //        oilKm.setText(truck.getOilKm());
