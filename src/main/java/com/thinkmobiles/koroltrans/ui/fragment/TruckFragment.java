@@ -33,6 +33,7 @@ public class TruckFragment extends Fragment {
         if (getArguments() != null) {
             truck = (Truck) getArguments().getSerializable("TRUCK");
         }
+
     }
 
     @Override
