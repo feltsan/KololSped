@@ -14,7 +14,7 @@ import android.widget.Toast;
 
 import com.thinkmobiles.koroltrans.R;
 import com.thinkmobiles.koroltrans.ui.activity.LoginActivity;
-import com.thinkmobiles.koroltrans.ui.activity.MainActivity;
+import com.thinkmobiles.koroltrans.ui.activity.AllTruckActivity;
 
 /**
  * Created by john on 26.09.tacho.
@@ -41,7 +41,7 @@ public class SignInFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if(chekPass(pass.getText().toString())) {
-                    startActivity(new Intent(getActivity(), MainActivity.class));
+                    startActivity(new Intent(getActivity(), AllTruckActivity.class));
                     passSP.edit().putBoolean(loginActivity.CHECKPASS, false).commit();
                     getActivity().finish();
                 }

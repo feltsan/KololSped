@@ -12,7 +12,7 @@ import android.view.ViewGroup;
 import com.thinkmobiles.koroltrans.R;
 import com.thinkmobiles.koroltrans.TruckPagerAdapter;
 import com.thinkmobiles.koroltrans.model.Truck;
-import com.thinkmobiles.koroltrans.ui.activity.MainActivity;
+import com.thinkmobiles.koroltrans.ui.activity.AllTruckActivity;
 
 import java.util.ArrayList;
 
@@ -24,7 +24,7 @@ public class AllTruckPagerFragment extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        trucks = ((MainActivity) context).getTrucks();
+        trucks = ((AllTruckActivity) context).getTrucks();
     }
 
     @Override

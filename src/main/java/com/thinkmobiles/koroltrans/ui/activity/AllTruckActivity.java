@@ -24,7 +24,7 @@ import com.thinkmobiles.koroltrans.ui.fragment.AllTruckPagerFragment;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class AllTruckActivity extends AppCompatActivity {
     FloatingActionButton fba;
     ArrayList<Truck> trucks = new ArrayList<>();
     @Override

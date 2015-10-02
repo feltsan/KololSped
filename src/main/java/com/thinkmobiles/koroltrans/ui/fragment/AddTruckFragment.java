@@ -17,7 +17,7 @@ import android.widget.Toast;
 
 import com.thinkmobiles.koroltrans.R;
 import com.thinkmobiles.koroltrans.model.Truck;
-import com.thinkmobiles.koroltrans.ui.activity.MainActivity;
+import com.thinkmobiles.koroltrans.ui.activity.AllTruckActivity;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -27,7 +27,7 @@ import java.util.Calendar;
  * Created by john on 27.09.tacho.
  */
 public class AddTruckFragment extends Fragment implements View.OnClickListener {
-    MainActivity mainActivity;
+    AllTruckActivity allTruckActivity;
     TextView greenCartDateTruck;
     TextView certDateTruck;
     TextView europackDateTruck;
@@ -62,7 +62,7 @@ public class AddTruckFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        mainActivity = (MainActivity) context;
+        allTruckActivity = (AllTruckActivity) context;
 
     }
 

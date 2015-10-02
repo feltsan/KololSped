@@ -49,7 +49,7 @@ public class TruckFragment extends Fragment {
 //        TextView strachNom = (TextView) root.findViewById(R.id.strachNomer);
 //        TextView strachDate = (TextView) root.findViewById(R.id.strachDate);
 
-//       stavka.setText(truck.getId());
+//   cd//    stavka.setText(truck.getId());
 //        techPasSer.setText(truck.getTechPasSerie());
 //        techPasNom.setText(truck.getTechPasNomer());
 //        oilKm.setText(truck.getOilKm());
