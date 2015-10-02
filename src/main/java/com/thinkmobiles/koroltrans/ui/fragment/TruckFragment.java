@@ -25,6 +25,7 @@ public class TruckFragment extends Fragment {
         args.putSerializable("TRUCK", _item);
         fragment.setArguments(args);
         return fragment;
+
     }
 
     @Override
