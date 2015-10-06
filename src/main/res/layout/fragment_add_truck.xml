@@ -762,15 +762,28 @@
     </LinearLayout>
 
 
-    <Button
-        android:id="@+id/save"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <LinearLayout
         android:layout_below="@+id/trailerLayout"
-        android:layout_centerHorizontal="true"
-        android:layout_gravity="bottom"
-        android:layout_marginTop="@dimen/abc_alert_dialog_button_bar_height"
-        android:text="Зберегти" />
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal"
+        android:layout_marginTop="@dimen/abc_alert_dialog_button_bar_height">
+
+        <Button
+            android:id="@+id/save"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Зберегти"
+            android:layout_marginRight="15dp"/>
+        <Button
+            android:id="@+id/delete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Видалити"
+            android:visibility="gone"/>
+    </LinearLayout>
+
     </RelativeLayout>
 
 </ScrollView>

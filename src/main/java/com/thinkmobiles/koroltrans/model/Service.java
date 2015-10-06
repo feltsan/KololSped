@@ -10,14 +10,13 @@ import java.util.UUID;
  * Created by john on 05.10.15.
  */
 
-@ParseClassName("Oil")
-public class Oil extends ParseObject {
-    public Oil() {
+@ParseClassName("Service")
+public class Service extends ParseObject {
+    public Service() {
         super();
     }
 
-    public Oil(String date, String distance, String brend, String oilFiter,
-              String airFilter, String fuelFilter, String glagodel,
+    public Service(String date, String distance,String zapchast, String brend,
                String price, String service, Truck truck) {
         super();
     }
@@ -30,24 +29,12 @@ public class Oil extends ParseObject {
         put("distance", distance);
     }
 
+    public void setZapchast(String zapchast){
+        put("zapchast", zapchast);
+    }
+
     public void setBrend(String brend){
         put("brend", brend);
-    }
-
-    public void setOilFiter(String oilFilter){
-        put("oil_filter", oilFilter);
-    }
-
-    public void setAirFilter(String airFilter){
-        put("air_filter", airFilter);
-    }
-
-    public void setFuelFilter(String fuelFilter){
-        put("fuel_filter", fuelFilter);
-    }
-
-    public void setGlagoDel(String glagodel){
-        put("glagodel", glagodel);
     }
 
     public void setPrice(String price){
@@ -71,37 +58,26 @@ public class Oil extends ParseObject {
         return getString("uuid");
     }
 
-    public static ParseQuery<Oil> getQuery() {
-        return ParseQuery.getQuery(Oil.class);
+    public static ParseQuery<Service> getQuery() {
+        return ParseQuery.getQuery(Service.class);
     }
 
     public String getDate(){
-       return getString("date");
+        return getString("date");
     }
 
     public String getDistance(){
         return getString("distance");
     }
 
+    public String getZapchast(){
+        return getString("zapchast");
+    }
+
     public String getBrend(){
         return getString("brend");
     }
 
-    public String getOilFiter(){
-        return getString("oil_filter");
-    }
-
-    public String getAirFilter(){
-        return getString("air_filter");
-    }
-
-    public String getFuelFilter(){
-        return getString("fuel_filter");
-    }
-
-    public String getGlagoDel(){
-        return getString("glagodel");
-    }
 
     public String getPrice(){
         return getString("price");

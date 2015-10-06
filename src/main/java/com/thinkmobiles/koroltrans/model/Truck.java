@@ -1,83 +1,57 @@
 package com.thinkmobiles.koroltrans.model;
 
-import java.io.Serializable;
+import com.parse.ParseClassName;
+import com.parse.ParseObject;
+import com.parse.ParseQuery;
+
 import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 /**
- * Created by john on 27.09.tacho.
+ * Created by john on 05.10.15.
  */
-public class Truck implements Serializable {
-    private String id;
-    private String derzhNomer;
 
-    private Trailer trailer;
-    private TruckDocuments truckDocuments;
-    private ArrayList<Repair> repairs;
-    private ArrayList<Oil> oils;
-    private ArrayList<Order> orders;
-
-    public Truck(String id, String derzhNomer, Trailer trailer, TruckDocuments truckDocuments, ArrayList<Repair> repairs, ArrayList<Oil> oils, ArrayList<Order> orders) {
-        this.id = id;
-        this.derzhNomer = derzhNomer;
-        this.trailer = trailer;
-        this.truckDocuments = truckDocuments;
-        this.repairs = repairs;
-        this.oils = oils;
-        this.orders = orders;
+@ParseClassName("Truck")
+public class Truck extends ParseObject {
+    public Truck() {
+        super();
     }
 
-    public String getId() {        return id;
+    public Truck(String nomer, String tr_nomer) {
+        super();
+        setNomer(nomer);
+        setTrailerNomer(tr_nomer);
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setNomer(String nomer){
+        put("nomer", nomer);
     }
 
-    public String getDerzhNomer() {
-        return derzhNomer;
+    public void setTrailerNomer(String tr_nomer){
+        put("trailer_nomer", tr_nomer);
     }
 
-    public void setDerzhNomer(String derzhNomer) {
-        this.derzhNomer = derzhNomer;
+    public void setUuidString() {
+        UUID uuid = UUID.randomUUID();
+        put("uuid", uuid.toString());
     }
 
-    public Trailer getTrailer() {
-        return trailer;
+    public String getUuidString() {
+        return getString("uuid");
     }
 
-    public void setTrailer(Trailer trailer) {
-        this.trailer = trailer;
+    public static ParseQuery<Truck> getQuery() {
+        return ParseQuery.getQuery(Truck.class);
     }
 
-    public TruckDocuments getTruckDocuments() {
-        return truckDocuments;
+    public String getNomer(){
+        return getString("nomer");
     }
 
-    public void setTruckDocuments(TruckDocuments truckDocuments) {
-        this.truckDocuments = truckDocuments;
+    public String getTrailerNomer(){
+        return getString("trailer_nomer");
     }
 
-    public ArrayList<Repair> getRepairs() {
-        return repairs;
-    }
 
-    public void setRepairs(ArrayList<Repair> repairs) {
-        this.repairs = repairs;
-    }
-
-    public ArrayList<Oil> getOils() {
-        return oils;
-    }
-
-    public void setOils(ArrayList<Oil> oils) {
-        this.oils = oils;
-    }
-
-    public ArrayList<Order> getOrders() {
-        return orders;
-    }
-
-    public void setOrders(ArrayList<Order> orders) {
-        this.orders = orders;
-    }
 }
