@@ -225,14 +225,20 @@ public class AddTruckFragment extends Fragment implements View.OnClickListener {
         documentsList.add(documentPOLTru);
         documentsList.add(documentPOLTra);
 
+        for(Documents d:documentsList)
+            d.saveEventually();
+        truck.saveEventually();
+
         truck.pinInBackground(new SaveCallback() {
             @Override
             public void done(ParseException e) {
+
 
                 Documents.pinAllInBackground(documentsList, new SaveCallback() {
                     @Override
                     public void done(ParseException e) {
                         getActivity().finish();
+
                     }
                 });
 

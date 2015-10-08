@@ -7,7 +7,7 @@
     android:paddingBottom="5dp">
 
     <TableLayout
-        android:id="@+id/reysTable"
+        android:id="@+id/serviceTable"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@android:color/black"
@@ -156,7 +156,7 @@
 
     <ListView
         android:id="@+id/serviceList"
-        android:layout_below="@id/reysTable"
+        android:layout_below="@id/serviceTable"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 

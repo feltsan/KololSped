@@ -16,9 +16,6 @@ import com.thinkmobiles.koroltrans.ui.fragment.DetailFragment;
  * Created by john on 02.10.15.
  */
 public class DetailActivity extends AppCompatActivity {
-
-
-
     private int orient;
     String truckId;
     Truck truck;

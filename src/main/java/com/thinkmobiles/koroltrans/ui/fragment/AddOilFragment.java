@@ -105,6 +105,7 @@ public class AddOilFragment extends Fragment implements View.OnClickListener {
         oil.setPrice(price.getText().toString());
         oil.setGlagoDel(glagoDel.getText().toString());
         oil.setService(service.getText().toString());
+        oil.saveEventually();
         oil.pinInBackground(new SaveCallback() {
             @Override
             public void done(ParseException e) {

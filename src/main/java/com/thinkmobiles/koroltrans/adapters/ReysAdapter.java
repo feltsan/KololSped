@@ -29,7 +29,7 @@ public class ReysAdapter extends ParseQueryAdapter<Reys> {
     }
 
     @Override
-    public View getItemView(Reys reys, View view, ViewGroup parent) {
+    public View getItemView(final Reys reys, View view, ViewGroup parent) {
         ViewHolder holder;
         if (view == null) {
             view = inflater.inflate(R.layout.item_reys,parent, false);
@@ -49,7 +49,7 @@ public class ReysAdapter extends ParseQueryAdapter<Reys> {
         TextView finish = holder.finish;
         TextView client = holder.client;
         TextView price = holder.price;
-        CheckBox confirm = holder.confirm;
+        final CheckBox confirm = holder.confirm;
 
         date.setText(reys.getDate());
         start.setText(reys.getStart());
@@ -57,6 +57,13 @@ public class ReysAdapter extends ParseQueryAdapter<Reys> {
         client.setText(reys.getClient());
         price.setText(reys.getPrice());
         confirm.setChecked(reys.getConfirm());
+        confirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                reys.setConfirm(confirm.isChecked());
+                reys.saveInBackground();
+            }
+        });
 
 
         return view;

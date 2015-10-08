@@ -10,15 +10,19 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TableLayout;
 
 import com.parse.ParseQuery;
 import com.parse.ParseQueryAdapter;
 import com.thinkmobiles.koroltrans.App;
 import com.thinkmobiles.koroltrans.R;
 import com.thinkmobiles.koroltrans.adapters.ServiceAdapter;
+import com.thinkmobiles.koroltrans.model.Reys;
 import com.thinkmobiles.koroltrans.model.Servis;
 import com.thinkmobiles.koroltrans.ui.activity.AddActivity;
 import com.thinkmobiles.koroltrans.ui.activity.DetailActivity;
+
+import java.util.List;
 
 /**
  * Created by john on 04.10.15.
@@ -30,6 +34,7 @@ public class AllServiceFragment extends Fragment implements View.OnClickListener
     private DetailActivity detailActivity;
     private ServiceAdapter serviceAdapter;
     private ParseQueryAdapter.QueryFactory<Servis> factory;
+    private TableLayout tableLayout;
 
     @Override
     public void onAttach(Context context) {
@@ -49,6 +54,8 @@ public class AllServiceFragment extends Fragment implements View.OnClickListener
     private void findUI(View view) {
         serviceList = (ListView) view.findViewById(R.id.serviceList);
         fab    = (FloatingActionButton) view.findViewById(R.id.fab);
+        tableLayout = (TableLayout) view.findViewById(R.id.serviceTable);
+        tableLayout.setVisibility(View.INVISIBLE);
     }
 
     private void setListener(){
@@ -63,7 +70,7 @@ public class AllServiceFragment extends Fragment implements View.OnClickListener
 
     @Override
     public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-        openAddView();
+        openEditView(serviceAdapter.getItem(position));
         return false;
     }
 
@@ -80,6 +87,20 @@ public class AllServiceFragment extends Fragment implements View.OnClickListener
     public void setAdapter() {
         setFactory();
         serviceAdapter = new ServiceAdapter(getActivity(), factory);
+
+        serviceAdapter.addOnQueryLoadListener(new ParseQueryAdapter.OnQueryLoadListener<Servis>() {
+            @Override
+            public void onLoading() {
+
+            }
+
+            @Override
+            public void onLoaded(List<Servis> objects, Exception e) {
+                if (objects.size() > 0)
+                    tableLayout.setVisibility(View.VISIBLE);
+            }
+        });
+
         serviceList.setAdapter(serviceAdapter);
     }
 
@@ -102,4 +123,10 @@ public class AllServiceFragment extends Fragment implements View.OnClickListener
         super.onResume();
         serviceAdapter.loadObjects();
     }
+    private void openEditView(Servis servis) {
+        Intent i = new Intent(detailActivity, AddActivity.class);
+        i.putExtra("ID", servis.getUuidString());
+        startActivityForResult(i, App.EDIT_TRUCK_CODE);
+    }
+
 }

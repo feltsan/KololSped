@@ -25,6 +25,8 @@ import com.thinkmobiles.koroltrans.model.Truck;
 import com.thinkmobiles.koroltrans.ui.activity.AddActivity;
 import com.thinkmobiles.koroltrans.ui.activity.DetailActivity;
 
+import java.util.List;
+
 /**
  * Created by john on 04.10.15.
  */
@@ -45,6 +47,7 @@ public class AllReysFragment extends Fragment implements View.OnClickListener,Ad
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
         View root = inflater.inflate(R.layout.fragment_all_reys, container, false);
         findUI(root);
         setListener();
@@ -57,6 +60,7 @@ public class AllReysFragment extends Fragment implements View.OnClickListener,Ad
         reysList = (ListView) view.findViewById(R.id.reysList);
         fab = (FloatingActionButton) view.findViewById(R.id.fab);
         tableLayout = (TableLayout) view.findViewById(R.id.reysTable);
+        tableLayout.setVisibility(View.INVISIBLE);
     }
 
     @Override
@@ -78,7 +82,7 @@ public class AllReysFragment extends Fragment implements View.OnClickListener,Ad
 
     @Override
     public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-        openAddView();
+        openEditView(reysAdapter.getItem(position));
         return false;
     }
 
@@ -91,9 +95,28 @@ public class AllReysFragment extends Fragment implements View.OnClickListener,Ad
         startActivityForResult(i, App.REYS_CODE);
     }
 
+    private void openEditView(Reys reys) {
+        Intent i = new Intent(detailActivity, AddActivity.class);
+        i.putExtra("ID", reys.getUuidString());
+        startActivityForResult(i, App.EDIT_TRUCK_CODE);
+    }
+
     public void setAdapter() {
         setFactory();
         reysAdapter = new ReysAdapter(getActivity(), factory);
+
+        reysAdapter.addOnQueryLoadListener(new ParseQueryAdapter.OnQueryLoadListener<Reys>() {
+            @Override
+            public void onLoading() {
+
+            }
+
+            @Override
+            public void onLoaded(List<Reys> objects, Exception e) {
+                if(objects.size()>0)
+                    tableLayout.setVisibility(View.VISIBLE);
+            }
+        });
         reysList.setAdapter(reysAdapter);
     }
 

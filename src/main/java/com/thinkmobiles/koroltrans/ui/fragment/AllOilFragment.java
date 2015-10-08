@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TableLayout;
 import android.widget.TextView;
 
 import com.parse.ParseQuery;
@@ -35,6 +36,7 @@ public class AllOilFragment extends Fragment implements View.OnClickListener,Ada
     private DetailActivity detailActivity;
     private OilAdapter oilAdapter;
     private ParseQueryAdapter.QueryFactory<Oil> factory;
+    private TableLayout tableLayout;
 
     @Override
     public void onAttach(Context context) {
@@ -55,6 +57,8 @@ public class AllOilFragment extends Fragment implements View.OnClickListener,Ada
     private void findUI(View view) {
         oilList = (ListView) view.findViewById(R.id.oilList);
         fab    = (FloatingActionButton) view.findViewById(R.id.fab);
+        tableLayout = (TableLayout) view.findViewById(R.id.allOilTable);
+        tableLayout.setVisibility(View.INVISIBLE);
     }
 
     private void setListener(){
@@ -69,7 +73,7 @@ public class AllOilFragment extends Fragment implements View.OnClickListener,Ada
 
     @Override
     public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-        openAddView();
+        openEditView(oilAdapter.getItem(position));
         return false;
     }
 
@@ -86,6 +90,20 @@ public class AllOilFragment extends Fragment implements View.OnClickListener,Ada
     public void setAdapter() {
         setFactory();
         oilAdapter = new OilAdapter(getActivity(), factory);
+
+        oilAdapter.addOnQueryLoadListener(new ParseQueryAdapter.OnQueryLoadListener<Oil>() {
+            @Override
+            public void onLoading() {
+
+            }
+
+            @Override
+            public void onLoaded(List<Oil> objects, Exception e) {
+                if (objects.size() > 0)
+                    tableLayout.setVisibility(View.VISIBLE);
+            }
+        });
+
         oilList.setAdapter(oilAdapter);
     }
 
@@ -107,5 +125,11 @@ public class AllOilFragment extends Fragment implements View.OnClickListener,Ada
     public void onResume() {
         super.onResume();
         oilAdapter.loadObjects();
+    }
+
+    private void openEditView(Oil oil) {
+        Intent i = new Intent(detailActivity, AddActivity.class);
+        i.putExtra("ID", oil.getUuidString());
+        startActivityForResult(i, App.EDIT_TRUCK_CODE);
     }
 }

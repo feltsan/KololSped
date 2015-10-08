@@ -101,6 +101,7 @@ public class AddServiceFragment extends Fragment implements View.OnClickListener
         servis.setZapchast(zapchast.getText().toString());
         servis.setPrice(price.getText().toString());
         servis.setService(service.getText().toString());
+        servis.saveEventually();
         servis.pinInBackground(new SaveCallback() {
             @Override
             public void done(ParseException e) {

@@ -21,13 +21,18 @@ public class DetailFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        setRetainInstance(true);
         view = inflater.inflate(R.layout.fragment_detail, container, false);
         findUI(view);
         setListener();
 
         orient = getActivity().getResources().getConfiguration().orientation;
 
-        setFragment(new AllReysFragment());
+        if(orient!=1)
+        getActivity().getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.container, new AllReysFragment())
+                .commit();
 
         return view;
     }
@@ -78,5 +83,9 @@ public class DetailFragment extends Fragment implements View.OnClickListener {
                     .commit();
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
 
+    }
 }

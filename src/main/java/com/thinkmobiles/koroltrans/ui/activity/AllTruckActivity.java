@@ -26,7 +26,7 @@ import com.thinkmobiles.koroltrans.model.Truck;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AllTruckActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemClickListener {
+public class AllTruckActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemClickListener, AdapterView.OnItemLongClickListener {
     private FloatingActionButton fba;
     private GridView gridView;
     private ParseQueryAdapter.QueryFactory<Truck> factory;
@@ -76,7 +76,7 @@ public class AllTruckActivity extends AppCompatActivity implements View.OnClickL
             @Override
             public ParseQuery<Truck> create() {
                 ParseQuery<Truck> query = Truck.getQuery();
-                query.orderByDescending("createdAt");
+                query.orderByAscending("createdAt");
                 query.fromLocalDatastore();
                 return query;
             }
@@ -86,6 +86,7 @@ public class AllTruckActivity extends AppCompatActivity implements View.OnClickL
     public void setListener() {
         fba.setOnClickListener(this);
         gridView.setOnItemClickListener(this);
+        gridView.setOnItemLongClickListener(this);
 
 //            @Override
 //            public void onClick(View v) {
@@ -117,6 +118,12 @@ public class AllTruckActivity extends AppCompatActivity implements View.OnClickL
         startActivityForResult(i, App.DETAIL_TRUCK_CODE);
     }
 
+    private void openEditView(Truck truck) {
+        Intent i = new Intent(this, AddActivity.class);
+        i.putExtra("ID", truck.getUuidString());
+        startActivityForResult(i, App.EDIT_TRUCK_CODE);
+    }
+
     @Override
     public void onClick(View v) {
         openAddView();
@@ -138,5 +145,12 @@ public class AllTruckActivity extends AppCompatActivity implements View.OnClickL
                 truckAdapter.loadObjects();
             }
         }
+    }
+
+
+    @Override
+    public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+        openEditView(truckAdapter.getItem(position));
+        return false;
     }
 }

@@ -99,6 +99,7 @@ public class AddReysFragment extends Fragment implements View.OnClickListener {
         reys.setFinish(finish.getText().toString());
         reys.setClient(spedition.getText().toString());
         reys.setPrice(price.getText().toString());
+        reys.saveEventually();
         reys.pinInBackground(new SaveCallback() {
             @Override
             public void done(ParseException e) {
