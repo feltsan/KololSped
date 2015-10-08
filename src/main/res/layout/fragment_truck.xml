@@ -225,7 +225,7 @@
                             android:layout_weight="1"
                             android:background="@android:color/white"
                             android:gravity="center"
-                            android:text="1"
+
                             android:textColor="@android:color/black" />
 
                         <TextView
@@ -240,7 +240,7 @@
                             android:layout_weight="1"
                             android:background="@android:color/white"
                             android:gravity="center"
-                            android:text="2"
+
                             android:textColor="@android:color/black" />
 
                         <TextView
@@ -255,7 +255,7 @@
                             android:layout_weight="1"
                             android:background="@android:color/white"
                             android:gravity="center"
-                            android:text="3"
+
                             android:textColor="@android:color/black" />
 
                         <TextView
@@ -270,7 +270,7 @@
                             android:layout_weight="1"
                             android:background="@android:color/white"
                             android:gravity="center"
-                            android:text="4"
+
                             android:textColor="@android:color/black" />
 
                         <TextView
@@ -285,7 +285,7 @@
                             android:layout_weight="1"
                             android:background="@android:color/white"
                             android:gravity="center"
-                            android:text="5"
+
                             android:textColor="@android:color/black" />
 
 
@@ -330,7 +330,7 @@
                             android:layout_weight="1"
                             android:background="@android:color/white"
                             android:gravity="center"
-                            android:text="1"
+
                             android:textColor="@android:color/black" />
 
                         <TextView
@@ -345,7 +345,7 @@
                             android:layout_weight="1"
                             android:background="@android:color/white"
                             android:gravity="center"
-                            android:text="2"
+
                             android:textColor="@android:color/black" />
 
                         <TextView
@@ -360,7 +360,7 @@
                             android:layout_weight="1"
                             android:background="@android:color/white"
                             android:gravity="center"
-                            android:text="3"
+
                             android:textColor="@android:color/black" />
 
                         <TextView
@@ -375,7 +375,7 @@
                             android:layout_weight="1"
                             android:background="@android:color/white"
                             android:gravity="center"
-                            android:text="4"
+
                             android:textColor="@android:color/black" />
 
                         <TextView
@@ -390,7 +390,7 @@
                             android:layout_weight="1"
                             android:background="@android:color/white"
                             android:gravity="center"
-                            android:text="5"
+
                             android:textColor="@android:color/black" />
 
 
@@ -610,7 +610,7 @@
                             android:layout_weight="1"
                             android:background="@android:color/white"
                             android:gravity="center"
-                            android:text="1"
+
                             android:textColor="@android:color/black" />
 
                         <TextView
@@ -625,7 +625,7 @@
                             android:layout_weight="1"
                             android:background="@android:color/white"
                             android:gravity="center"
-                            android:text="2"
+
                             android:textColor="@android:color/black" />
 
                         <TextView
@@ -640,7 +640,7 @@
                             android:layout_weight="1"
                             android:background="@android:color/white"
                             android:gravity="center"
-                            android:text="3"
+
                             android:textColor="@android:color/black" />
 
                         <TextView
@@ -655,7 +655,7 @@
                             android:layout_weight="1"
                             android:background="@android:color/white"
                             android:gravity="center"
-                            android:text="4"
+
                             android:textColor="@android:color/black" />
 
                         <TextView
@@ -670,7 +670,7 @@
                             android:layout_weight="1"
                             android:background="@android:color/white"
                             android:gravity="center"
-                            android:text="5"
+
                             android:textColor="@android:color/black" />
 
 
@@ -715,7 +715,7 @@
                             android:layout_weight="1"
                             android:background="@android:color/white"
                             android:gravity="center"
-                            android:text="1"
+
                             android:textColor="@android:color/black" />
 
                         <TextView
@@ -730,7 +730,7 @@
                             android:layout_weight="1"
                             android:background="@android:color/white"
                             android:gravity="center"
-                            android:text="2"
+
                             android:textColor="@android:color/black" />
 
                         <TextView
@@ -745,7 +745,7 @@
                             android:layout_weight="1"
                             android:background="@android:color/white"
                             android:gravity="center"
-                            android:text="3"
+
                             android:textColor="@android:color/black" />
 
                         <TextView
@@ -760,7 +760,7 @@
                             android:layout_weight="1"
                             android:background="@android:color/white"
                             android:gravity="center"
-                            android:text="4"
+
                             android:textColor="@android:color/black" />
 
                         <TextView
@@ -775,7 +775,7 @@
                             android:layout_weight="1"
                             android:background="@android:color/white"
                             android:gravity="center"
-                            android:text="5"
+
                             android:textColor="@android:color/black" />
 
 

@@ -1,5 +1,6 @@
 package com.thinkmobiles.koroltrans.ui.fragment;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
@@ -11,8 +12,12 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.parse.ParseException;
+import com.parse.SaveCallback;
 import com.thinkmobiles.koroltrans.App;
 import com.thinkmobiles.koroltrans.R;
+import com.thinkmobiles.koroltrans.model.Oil;
+import com.thinkmobiles.koroltrans.ui.activity.AddActivity;
 
 /**
  * Created by john on 04.10.15.
@@ -23,6 +28,14 @@ public class AddOilFragment extends Fragment implements View.OnClickListener {
     private TextView date;
     private EditText distance, brend, oilFilter, airFilter, fuelFilter, glagoDel, price, service;
     private Button save, delete;
+    private AddActivity addActivity;
+
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        addActivity = (AddActivity) context;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -62,7 +75,7 @@ public class AddOilFragment extends Fragment implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.save:
-
+                saveOil();
                 break;
 
             case R.id.delete:
@@ -78,5 +91,25 @@ public class AddOilFragment extends Fragment implements View.OnClickListener {
         bundle.putInt(App.DATE_VIEW, v.getId());
         picker.setArguments(bundle);
         picker.show(getFragmentManager(), "datePicker");
+    }
+
+    public void saveOil(){
+        Oil oil = new Oil();
+        oil.setTruck(addActivity.getTruck());
+        oil.setDate(date.getText().toString());
+        oil.setDistance(distance.getText().toString());
+        oil.setBrend(brend.getText().toString());
+        oil.setOilFiter(oilFilter.getText().toString());
+        oil.setAirFilter(airFilter.getText().toString());
+        oil.setFuelFilter(fuelFilter.getText().toString());
+        oil.setPrice(price.getText().toString());
+        oil.setGlagoDel(glagoDel.getText().toString());
+        oil.setService(service.getText().toString());
+        oil.pinInBackground(new SaveCallback() {
+            @Override
+            public void done(ParseException e) {
+                getActivity().finish();
+            }
+        });
     }
 }

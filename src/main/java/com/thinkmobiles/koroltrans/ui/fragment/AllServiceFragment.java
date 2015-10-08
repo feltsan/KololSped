@@ -1,5 +1,6 @@
 package com.thinkmobiles.koroltrans.ui.fragment;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -10,9 +11,14 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.parse.ParseQuery;
+import com.parse.ParseQueryAdapter;
 import com.thinkmobiles.koroltrans.App;
 import com.thinkmobiles.koroltrans.R;
+import com.thinkmobiles.koroltrans.adapters.ServiceAdapter;
+import com.thinkmobiles.koroltrans.model.Servis;
 import com.thinkmobiles.koroltrans.ui.activity.AddActivity;
+import com.thinkmobiles.koroltrans.ui.activity.DetailActivity;
 
 /**
  * Created by john on 04.10.15.
@@ -21,13 +27,22 @@ public class AllServiceFragment extends Fragment implements View.OnClickListener
 
     private ListView serviceList;
     private FloatingActionButton fab;
+    private DetailActivity detailActivity;
+    private ServiceAdapter serviceAdapter;
+    private ParseQueryAdapter.QueryFactory<Servis> factory;
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        detailActivity = (DetailActivity) context;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_all_service, container, false);
         findUI(root);
         setListener();
-
+        setAdapter();
         return root;
     }
 
@@ -56,9 +71,35 @@ public class AllServiceFragment extends Fragment implements View.OnClickListener
 
     private void openAddView() {
         Intent i = new Intent(getActivity(), AddActivity.class);
-//        i.putExtra("ID", todo.getUuidString());
+        i.putExtra("ID", detailActivity.getIntent().getExtras().getString("ID"));
         i.putExtra("CODE", App.SERVICE_CODE);
 
         startActivityForResult(i, App.SERVICE_CODE);
+    }
+
+    public void setAdapter() {
+        setFactory();
+        serviceAdapter = new ServiceAdapter(getActivity(), factory);
+        serviceList.setAdapter(serviceAdapter);
+    }
+
+    public void setFactory() {
+        factory = new ParseQueryAdapter.QueryFactory<Servis>() {
+            @Override
+            public ParseQuery<Servis> create() {
+                ParseQuery<Servis> query = Servis.getQuery();
+                query.include("truck");
+                query.whereEqualTo("truck", detailActivity.getTruck());
+                query.orderByDescending("createdAt");
+                query.fromLocalDatastore();
+                return query;
+            }
+        };
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        serviceAdapter.loadObjects();
     }
 }

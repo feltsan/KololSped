@@ -1,5 +1,6 @@
 package com.thinkmobiles.koroltrans.ui.fragment;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -11,9 +12,16 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.parse.ParseQuery;
+import com.parse.ParseQueryAdapter;
 import com.thinkmobiles.koroltrans.App;
 import com.thinkmobiles.koroltrans.R;
+import com.thinkmobiles.koroltrans.adapters.OilAdapter;
+import com.thinkmobiles.koroltrans.adapters.ReysAdapter;
+import com.thinkmobiles.koroltrans.model.Oil;
+import com.thinkmobiles.koroltrans.model.Reys;
 import com.thinkmobiles.koroltrans.ui.activity.AddActivity;
+import com.thinkmobiles.koroltrans.ui.activity.DetailActivity;
 
 import java.util.List;
 
@@ -24,12 +32,22 @@ public class AllOilFragment extends Fragment implements View.OnClickListener,Ada
 
     private ListView oilList;
     private FloatingActionButton fab;
+    private DetailActivity detailActivity;
+    private OilAdapter oilAdapter;
+    private ParseQueryAdapter.QueryFactory<Oil> factory;
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        detailActivity = (DetailActivity) context;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_all_oil, container, false);
         findUI(root);
         setListener();
+        setAdapter();
 
         return root;
     }
@@ -59,9 +77,35 @@ public class AllOilFragment extends Fragment implements View.OnClickListener,Ada
 
     private void openAddView() {
         Intent i = new Intent(getActivity(), AddActivity.class);
-//        i.putExtra("ID", todo.getUuidString());
+        i.putExtra("ID", detailActivity.getIntent().getExtras().getString("ID"));
         i.putExtra("CODE", App.OIL_CODE);
 
         startActivityForResult(i, App.OIL_CODE);
+    }
+
+    public void setAdapter() {
+        setFactory();
+        oilAdapter = new OilAdapter(getActivity(), factory);
+        oilList.setAdapter(oilAdapter);
+    }
+
+    public void setFactory() {
+        factory = new ParseQueryAdapter.QueryFactory<Oil>() {
+            @Override
+            public ParseQuery<Oil> create() {
+                ParseQuery<Oil> query = Oil.getQuery();
+                query.include("truck");
+                query.whereEqualTo("truck", detailActivity.getTruck());
+                query.orderByDescending("createdAt");
+                query.fromLocalDatastore();
+                return query;
+            }
+        };
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        oilAdapter.loadObjects();
     }
 }

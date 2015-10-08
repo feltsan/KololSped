@@ -107,7 +107,7 @@ public class Oil extends ParseObject {
         return getString("price");
     }
 
-    public String getService(String service){
+    public String getService(){
         return getString("service");
     }
 

@@ -136,18 +136,13 @@ public class AddTruckFragment extends Fragment implements View.OnClickListener {
     }
 
     public void saveTruck(){
+
+      final List<Documents> documentsList = new ArrayList<>();
+
         truck = new Truck();
         truck.setUuidString();
         truck.setNomer(nomer.getText().toString());
         truck.setTrailerNomer(trailerNomer.getText().toString());
-
-        truck.pinInBackground(new SaveCallback() {
-            @Override
-            public void done(ParseException e) {
-
-            }
-        });
-
 
         documentGCTru = new Documents();
         documentGCTru.setUuidString();
@@ -156,27 +151,12 @@ public class AddTruckFragment extends Fragment implements View.OnClickListener {
         documentGCTru.setPrice(greenCartPriceTruck.getText().toString());
         documentGCTru.setTruck(truck);
 
-
-        documentGCTru.pinInBackground(new SaveCallback() {
-            @Override
-            public void done(ParseException e) {
-
-            }
-        });
-
         documentGCTra = new Documents();
         documentGCTra.setUuidString();
         documentGCTra.setEndDate(greenCartDateTrailer.getText().toString());
         documentGCTra.setType(App.GCTra);
         documentGCTra.setPrice(greenCartPriceTrailer.getText().toString());
         documentGCTra.setTruck(truck);
-
-        documentGCTra.pinInBackground(new SaveCallback() {
-            @Override
-            public void done(ParseException e) {
-
-            }
-        });
 
         documentWSTru = new Documents();
         documentWSTru.setUuidString();
@@ -185,26 +165,12 @@ public class AddTruckFragment extends Fragment implements View.OnClickListener {
         documentWSTru.setPrice(certPriceTruck.getText().toString());
         documentWSTru.setTruck(truck);
 
-        documentWSTru.pinInBackground(new SaveCallback() {
-            @Override
-            public void done(ParseException e) {
-
-            }
-        });
-
         documentWSTra = new Documents();
         documentWSTra.setUuidString();
         documentWSTra.setEndDate(certDateTrailer.getText().toString());
-        documentWSTra.setType(App.WSTru);
+        documentWSTra.setType(App.WSTra);
         documentWSTra.setPrice(certPriceTrailer.getText().toString());
         documentWSTra.setTruck(truck);
-
-        documentWSTra.pinInBackground(new SaveCallback() {
-            @Override
-            public void done(ParseException e) {
-
-            }
-        });
 
         documentEPTru = new Documents();
         documentEPTru.setUuidString();
@@ -213,26 +179,12 @@ public class AddTruckFragment extends Fragment implements View.OnClickListener {
         documentEPTru.setPrice(europackPriceTruck.getText().toString());
         documentEPTru.setTruck(truck);
 
-        documentEPTru.pinInBackground(new SaveCallback() {
-            @Override
-            public void done(ParseException e) {
-
-            }
-        });
-
         documentEPTra = new Documents();
         documentEPTra.setUuidString();
         documentEPTra.setEndDate(europackDateTrailer.getText().toString());
         documentEPTra.setType(App.EPTra);
         documentEPTra.setPrice(europackPriceTrailer.getText().toString());
         documentEPTra.setTruck(truck);
-
-        documentEPTra.pinInBackground(new SaveCallback() {
-            @Override
-            public void done(ParseException e) {
-
-            }
-        });
 
         documentTACHO = new Documents();
         documentTACHO.setUuidString();
@@ -241,26 +193,12 @@ public class AddTruckFragment extends Fragment implements View.OnClickListener {
         documentTACHO.setPrice(tachoPriceTruck.getText().toString());
         documentTACHO.setTruck(truck);
 
-        documentTACHO.pinInBackground(new SaveCallback() {
-            @Override
-            public void done(ParseException e) {
-
-            }
-        });
-
         documentYSTra = new Documents();
         documentYSTra.setUuidString();
         documentYSTra.setEndDate(svidDateTrailer.getText().toString());
         documentYSTra.setType(App.YSTra);
         documentYSTra.setPrice(svidPriceTrailer.getText().toString());
         documentYSTra.setTruck(truck);
-
-        documentYSTra.pinInBackground(new SaveCallback() {
-            @Override
-            public void done(ParseException e) {
-
-            }
-        });
 
         documentPOLTru = new Documents();
         documentPOLTru.setUuidString();
@@ -269,13 +207,6 @@ public class AddTruckFragment extends Fragment implements View.OnClickListener {
         documentPOLTru.setPrice(strachPriceTruck.getText().toString());
         documentPOLTru.setTruck(truck);
 
-        documentPOLTru.pinInBackground(new SaveCallback() {
-            @Override
-            public void done(ParseException e) {
-
-            }
-        });
-
         documentPOLTra = new Documents();
         documentPOLTra.setUuidString();
         documentPOLTra.setEndDate(strachDateTrailer.getText().toString());
@@ -283,14 +214,30 @@ public class AddTruckFragment extends Fragment implements View.OnClickListener {
         documentPOLTra.setPrice(strachPriceTrailer.getText().toString());
         documentPOLTra.setTruck(truck);
 
-        documentPOLTra.pinInBackground(new SaveCallback() {
+        documentsList.add(documentGCTru);
+        documentsList.add(documentGCTra);
+        documentsList.add(documentWSTru);
+        documentsList.add(documentWSTra);
+        documentsList.add(documentEPTru);
+        documentsList.add(documentEPTra);
+        documentsList.add(documentTACHO);
+        documentsList.add(documentYSTra);
+        documentsList.add(documentPOLTru);
+        documentsList.add(documentPOLTra);
+
+        truck.pinInBackground(new SaveCallback() {
             @Override
             public void done(ParseException e) {
 
+                Documents.pinAllInBackground(documentsList, new SaveCallback() {
+                    @Override
+                    public void done(ParseException e) {
+                        getActivity().finish();
+                    }
+                });
+
             }
         });
-
-
 
     }
 

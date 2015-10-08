@@ -3,12 +3,22 @@ package com.thinkmobiles.koroltrans.ui.fragment;
 
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.parse.FindCallback;
+import com.parse.GetCallback;
+import com.parse.ParseException;
+import com.parse.ParseQuery;
+import com.thinkmobiles.koroltrans.App;
 import com.thinkmobiles.koroltrans.R;
+import com.thinkmobiles.koroltrans.model.Documents;
+import com.thinkmobiles.koroltrans.model.Truck;
+
+import java.util.List;
 
 /**
  * Created by john on 27.09.tacho.
@@ -25,6 +35,7 @@ public class TruckFragment extends Fragment {
     TextView europackDateTrailer;
     TextView svidDateTrailer;
     TextView starchDateTrailer;
+    TextView truckNomer, traNomer;
 
 
     TextView greenCartPriceTruck;
@@ -38,16 +49,44 @@ public class TruckFragment extends Fragment {
     TextView svidPriceTrailer;
     TextView starchPriceTrailer;
 
+
+    String nomer, trailerNomer,     greenCartDateTru,
+            certDateTru,
+            europackDateTru,
+            tachoDateTru,
+            starchDateTru,
+            greenCartDateTra,
+            certDateTra,
+            europackDateTra,
+            svidDateTra,
+            starchDateTra,
+
+
+    greenCartPriceTru,
+            certPriceTru,
+            europackPriceTru,
+            tachoPriceTru,
+            starchPriceTru,
+            greenCartPriceTra,
+            certPriceTra,
+            europackPriceTra,
+            svidPriceTra,
+            starchPriceTra;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_truck, container, false);
 
         findUI(root);
+        setData();
+
 
         return root;
     }
 
     private void findUI(View view) {
+        truckNomer = (TextView) view.findViewById(R.id.nomerZnakTruck);
+        traNomer = (TextView) view.findViewById(R.id.nomerZnakTrailer);
         greenCartDateTruck = (TextView) view.findViewById(R.id.greenCardDateTruck);
         certDateTruck = (TextView) view.findViewById(R.id.certDateTruck);
         europackDateTruck = (TextView) view.findViewById(R.id.europackDateTruck);
@@ -76,8 +115,118 @@ public class TruckFragment extends Fragment {
     }
 
     private void setData(){
+        String truckId = getActivity().getIntent().getStringExtra("ID");
+        ParseQuery<Truck> query = ParseQuery.getQuery(Truck.class);
+// First try to find from the cache and only then go to network
+//        query.setCachePolicy(ParseQuery.CachePolicy.CACHE_ONLY); // or CACHE_ONLY
+// Execute the query to find the object with ID
+        query.fromLocalDatastore();
+        query.whereEqualTo("uuid", truckId);
+        query.getFirstInBackground(new GetCallback<Truck>() {
+            @Override
+            public void done(Truck object, ParseException e) {
+                getAllDocuments(object);
+            }
+        });
+
 
     }
 
+    public void getAllDocuments(final Truck truck){
+
+        ParseQuery<Documents> query_doc = ParseQuery.getQuery(Documents.class);
+        query_doc.whereEqualTo("truck",truck);
+        query_doc.fromLocalDatastore();
+        query_doc.findInBackground(new FindCallback<Documents>() {
+            @Override
+            public void done(List<Documents> objects, ParseException e) {
+                for (Documents documents : objects) {
+                    switch (documents.getType()) {
+                        case App.GCTru:
+                            greenCartDateTru = documents.getEndDate();
+                            greenCartPriceTru = documents.getPrice();
+                            break;
+
+                        case App.GCTra:
+                            greenCartDateTra = documents.getEndDate();
+                            greenCartPriceTra = documents.getPrice();
+                            break;
+
+                        case App.WSTru:
+                            certDateTru = documents.getEndDate();
+                            certPriceTru = documents.getPrice();
+                            break;
+
+                        case App.WSTra:
+                            certDateTra = documents.getEndDate();
+                            certPriceTra = documents.getPrice();
+                            break;
+
+                        case App.EPTru:
+                            europackDateTru = documents.getEndDate();
+                            europackPriceTru = documents.getPrice();
+                            break;
+
+                        case App.EPTra:
+                            europackDateTra = documents.getEndDate();
+                            europackPriceTra = documents.getPrice();
+                            break;
+
+                        case App.TACHO:
+                            tachoDateTru = documents.getEndDate();
+                            tachoPriceTru = documents.getPrice();
+                            break;
+
+                        case App.YSTra:
+                            svidDateTra = documents.getEndDate();
+                            svidPriceTra = documents.getPrice();
+                            break;
+
+                        case App.POLTru:
+                            starchDateTru = documents.getEndDate();
+                            starchPriceTru = documents.getPrice();
+                            break;
+
+                        case App.POLTra:
+                            starchDateTra = documents.getEndDate();
+                            starchPriceTra = documents.getPrice();
+                            break;
+
+                    }
+
+                }
+
+                nomer = truck.getNomer();
+                trailerNomer = truck.getTrailerNomer();
+
+                truckNomer.setText(nomer);
+                traNomer.setText(trailerNomer);
+
+                greenCartDateTruck.setText(greenCartDateTru);
+                certDateTruck.setText(certDateTru);
+                europackDateTruck.setText(europackDateTru);
+                tachoDateTruck.setText(tachoDateTru);
+                starchDateTruck.setText(starchDateTru);
+
+                greenCartDateTrailer.setText(greenCartDateTra);
+                certDateTrailer.setText(certDateTra);
+                europackDateTrailer.setText(europackDateTra);
+                svidDateTrailer.setText(svidDateTra);
+                starchDateTrailer.setText(starchDateTra);
+
+                greenCartPriceTruck.setText(greenCartPriceTru);
+                certPriceTruck.setText(certPriceTru);
+                europackPriceTruck.setText(europackPriceTru);
+                tachoPriceTruck.setText(tachoPriceTru);
+                starchPriceTruck.setText(starchPriceTru);
+
+                greenCartPriceTrailer.setText(greenCartPriceTra);
+                certPriceTrailer.setText(certPriceTra);
+                europackPriceTrailer.setText(europackPriceTra);
+                svidPriceTrailer.setText(svidPriceTra);
+                starchPriceTrailer.setText(starchPriceTra);
+            }
+        });
+    }
 
 }

@@ -8,7 +8,7 @@ import com.parse.ParseObject;
 import com.thinkmobiles.koroltrans.model.Documents;
 import com.thinkmobiles.koroltrans.model.Oil;
 import com.thinkmobiles.koroltrans.model.Reys;
-import com.thinkmobiles.koroltrans.model.Service;
+import com.thinkmobiles.koroltrans.model.Servis;
 import com.thinkmobiles.koroltrans.model.Truck;
 
 /**
@@ -35,6 +35,7 @@ public class App extends Application{
     public static final int POLTra =10;
 
     public static final String TRUCK_GROUP_NAME = "ALL_TRUCK";
+    public static final String TRUCK_ID = "TRUCK_ID";
 
     @Override
     public void onCreate() {
@@ -44,7 +45,7 @@ public class App extends Application{
         ParseObject.registerSubclass(Documents.class);
         ParseObject.registerSubclass(Reys.class);
         ParseObject.registerSubclass(Oil.class);
-        ParseObject.registerSubclass(Service.class);
+        ParseObject.registerSubclass(Servis.class);
 
         Parse.enableLocalDatastore(this);
         Parse.initialize(this, "MlysikbcKw2P35Bp0FdkCncIzjLRttezJowoqtj0", "cUbHLOLJqcnmtcp2ZBZ0cTBImdrfxBSvORnqnUff");

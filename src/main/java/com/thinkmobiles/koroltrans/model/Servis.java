@@ -10,14 +10,14 @@ import java.util.UUID;
  * Created by john on 05.10.15.
  */
 
-@ParseClassName("Service")
-public class Service extends ParseObject {
-    public Service() {
+@ParseClassName("Servis")
+public class Servis extends ParseObject {
+    public Servis() {
         super();
     }
 
-    public Service(String date, String distance,String zapchast, String brend,
-               String price, String service, Truck truck) {
+    public Servis(String date, String distance, String zapchast, String brend,
+                  String price, String service, Truck truck) {
         super();
     }
 
@@ -58,8 +58,8 @@ public class Service extends ParseObject {
         return getString("uuid");
     }
 
-    public static ParseQuery<Service> getQuery() {
-        return ParseQuery.getQuery(Service.class);
+    public static ParseQuery<Servis> getQuery() {
+        return ParseQuery.getQuery(Servis.class);
     }
 
     public String getDate(){
@@ -83,7 +83,7 @@ public class Service extends ParseObject {
         return getString("price");
     }
 
-    public String getService(String service){
+    public String getService(){
         return getString("service");
     }
 

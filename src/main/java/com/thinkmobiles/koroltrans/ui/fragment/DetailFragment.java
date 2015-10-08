@@ -17,12 +17,18 @@ public class DetailFragment extends Fragment implements View.OnClickListener {
     LinearLayout reys, oil, service, documents;
 
     View view;
+    private int orient;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_detail, container, false);
         findUI(view);
         setListener();
+
+        orient = getActivity().getResources().getConfiguration().orientation;
+
+        setFragment(new AllReysFragment());
+
         return view;
     }
 
@@ -44,34 +50,33 @@ public class DetailFragment extends Fragment implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.speditionTV:
-                getActivity().getSupportFragmentManager()
-                        .beginTransaction()
-                        .replace(R.id.container, new AllReysFragment())
-                        .commit();
+              setFragment(new AllReysFragment());
                 break;
-
             case R.id.oilTV:
-                getActivity().getSupportFragmentManager()
-                        .beginTransaction()
-                        .replace(R.id.container, new AllOilFragment())
-                        .commit();
+                setFragment(new AllOilFragment());
                 break;
-
             case R.id.serviceTV:
-                getActivity().getSupportFragmentManager()
-                        .beginTransaction()
-                        .replace(R.id.container, new AllServiceFragment())
-                        .commit();
+                setFragment(new AllServiceFragment());
                 break;
-
             case R.id.documetsTV:
-                getActivity().getSupportFragmentManager()
-                        .beginTransaction()
-                        .replace(R.id.container, new TruckFragment())
-                        .commit();
+                setFragment(new TruckFragment());
                 break;
-
-
         }
     }
+
+    public void setFragment(Fragment fragment){
+        if(orient==1)
+            getActivity().getSupportFragmentManager()
+                    .beginTransaction()
+                    .add(R.id.add_container, fragment)
+                    .addToBackStack("")
+                    .commit();
+        else
+            getActivity().getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.container, fragment)
+                    .commit();
+    }
+
+
 }

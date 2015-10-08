@@ -5,8 +5,8 @@
     android:layout_gravity="center">
 
     <RelativeLayout
-        android:paddingTop="50dp"
-        android:paddingBottom="50dp"
+        android:paddingTop="20dp"
+        android:paddingBottom="20dp"
         android:gravity="center"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -43,7 +43,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:id="@+id/oilTM"
+            android:id="@+id/oilTV"
             android:layout_below="@id/speditionTV"
             android:layout_marginTop="15dp"
             android:paddingLeft="25dp"
@@ -71,7 +71,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:id="@+id/serviceTV"
-            android:layout_below="@id/oilTM"
+            android:layout_below="@id/oilTV"
            android:layout_marginTop="15dp"
             >
 
@@ -128,7 +128,7 @@
         android:layout_toEndOf="@+id/relativeLayout" />
 
     <FrameLayout
-        android:id="@+id/detail_container"
+        android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentTop="true"

@@ -1,5 +1,6 @@
 package com.thinkmobiles.koroltrans.ui.fragment;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
@@ -10,8 +11,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.parse.ParseException;
+import com.parse.SaveCallback;
 import com.thinkmobiles.koroltrans.App;
 import com.thinkmobiles.koroltrans.R;
+import com.thinkmobiles.koroltrans.model.Reys;
+import com.thinkmobiles.koroltrans.ui.activity.AddActivity;
 
 /**
  * Created by john on 04.10.15.
@@ -22,7 +27,14 @@ public class AddReysFragment extends Fragment implements View.OnClickListener {
     private TextView date;
     private EditText start, finish, spedition, price;
     private Button save, delete;
+    private AddActivity addActivity;
 
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        addActivity = (AddActivity) context;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -60,7 +72,7 @@ public class AddReysFragment extends Fragment implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.save:
-
+                saveReys();
                 break;
 
             case R.id.delete:
@@ -77,5 +89,21 @@ public class AddReysFragment extends Fragment implements View.OnClickListener {
         bundle.putInt(App.DATE_VIEW, v.getId());
         picker.setArguments(bundle);
         picker.show(getFragmentManager(), "datePicker");
+    }
+
+    private void saveReys(){
+        Reys reys = new Reys();
+        reys.setTruck(addActivity.getTruck());
+        reys.setDate(date.getText().toString());
+        reys.setStart(start.getText().toString());
+        reys.setFinish(finish.getText().toString());
+        reys.setClient(spedition.getText().toString());
+        reys.setPrice(price.getText().toString());
+        reys.pinInBackground(new SaveCallback() {
+            @Override
+            public void done(ParseException e) {
+                getActivity().finish();
+            }
+        });
     }
 }

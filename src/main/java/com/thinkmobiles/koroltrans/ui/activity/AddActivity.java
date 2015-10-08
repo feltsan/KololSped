@@ -4,8 +4,12 @@ import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
+import com.parse.GetCallback;
+import com.parse.ParseException;
+import com.parse.ParseQuery;
 import com.thinkmobiles.koroltrans.App;
 import com.thinkmobiles.koroltrans.R;
+import com.thinkmobiles.koroltrans.model.Truck;
 import com.thinkmobiles.koroltrans.ui.fragment.AddOilFragment;
 import com.thinkmobiles.koroltrans.ui.fragment.AddReysFragment;
 import com.thinkmobiles.koroltrans.ui.fragment.AddServiceFragment;
@@ -18,6 +22,10 @@ public class AddActivity extends AppCompatActivity {
 
     private int code =-1;
     private Fragment fragment;
+    String truckId;
+    Truck truck;
+
+
 
 
 
@@ -31,13 +39,36 @@ public class AddActivity extends AppCompatActivity {
         if (getIntent().hasExtra("CODE")) {
             code = getIntent().getExtras().getInt("CODE");
         }
+
+        if(getIntent().hasExtra("ID")) {
+            truckId = getIntent().getExtras().getString("ID");
+            getTruckOF();
+        }
+        else
+          openFragment();
+
+    }
+    public void getTruckOF(){
+        ParseQuery<Truck> query = ParseQuery.getQuery(Truck.class);
+        query.fromLocalDatastore();
+        query.whereEqualTo("uuid", truckId);
+        query.getFirstInBackground(new GetCallback<Truck>() {
+            @Override
+            public void done(Truck object, ParseException e) {
+                truck = object;
+                setTitle(object.getNomer());
+                openFragment();
+            }
+        });
+    }
+
+    public void openFragment(){
         switchFragment();
 
         getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.add_container, fragment)
                 .commit();
-
     }
 
     public void switchFragment(){
@@ -57,5 +88,8 @@ public class AddActivity extends AppCompatActivity {
         }
     }
 
+    public Truck getTruck(){
+        return truck;
+    }
 
 }
