@@ -98,6 +98,7 @@ public class AllReysFragment extends Fragment implements View.OnClickListener,Ad
     private void openEditView(Reys reys) {
         Intent i = new Intent(detailActivity, AddActivity.class);
         i.putExtra("ID", reys.getUuidString());
+        i.putExtra("CODE", App.EDIT_REYS_CODE);
         startActivityForResult(i, App.EDIT_TRUCK_CODE);
     }
 

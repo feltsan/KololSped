@@ -73,7 +73,7 @@ public class DetailFragment extends Fragment implements View.OnClickListener {
         if(orient==1)
             getActivity().getSupportFragmentManager()
                     .beginTransaction()
-                    .add(R.id.add_container, fragment)
+                    .replace(R.id.add_container, fragment)
                     .addToBackStack("")
                     .commit();
         else
@@ -88,4 +88,6 @@ public class DetailFragment extends Fragment implements View.OnClickListener {
         super.onResume();
 
     }
+
+
 }

@@ -121,6 +121,7 @@ public class AllTruckActivity extends AppCompatActivity implements View.OnClickL
     private void openEditView(Truck truck) {
         Intent i = new Intent(this, AddActivity.class);
         i.putExtra("ID", truck.getUuidString());
+        i.putExtra("CODE", App.EDIT_TRUCK_CODE);
         startActivityForResult(i, App.EDIT_TRUCK_CODE);
     }
 
@@ -151,6 +152,6 @@ public class AllTruckActivity extends AppCompatActivity implements View.OnClickL
     @Override
     public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
         openEditView(truckAdapter.getItem(position));
-        return false;
+        return true;
     }
 }

@@ -130,6 +130,7 @@ public class AllOilFragment extends Fragment implements View.OnClickListener,Ada
     private void openEditView(Oil oil) {
         Intent i = new Intent(detailActivity, AddActivity.class);
         i.putExtra("ID", oil.getUuidString());
+        i.putExtra("CODE", App.EDIT_OIL_CODE);
         startActivityForResult(i, App.EDIT_TRUCK_CODE);
     }
 }

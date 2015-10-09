@@ -1,6 +1,7 @@
 package com.thinkmobiles.koroltrans.ui.fragment;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
@@ -12,12 +13,17 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.parse.DeleteCallback;
 import com.parse.ParseException;
 import com.parse.SaveCallback;
 import com.thinkmobiles.koroltrans.App;
 import com.thinkmobiles.koroltrans.R;
 import com.thinkmobiles.koroltrans.model.Documents;
+import com.thinkmobiles.koroltrans.model.Oil;
+import com.thinkmobiles.koroltrans.model.Reys;
+import com.thinkmobiles.koroltrans.model.Servis;
 import com.thinkmobiles.koroltrans.model.Truck;
+import com.thinkmobiles.koroltrans.ui.activity.AddActivity;
 import com.thinkmobiles.koroltrans.ui.activity.AllTruckActivity;
 
 import java.util.ArrayList;
@@ -27,7 +33,7 @@ import java.util.List;
  * Created by john on 27.09.tacho.
  */
 public class AddTruckFragment extends Fragment implements View.OnClickListener {
-    AllTruckActivity allTruckActivity;
+    AddActivity addActivity;
     TextView greenCartDateTruck;
     TextView certDateTruck;
     TextView europackDateTruck;
@@ -57,11 +63,16 @@ public class AddTruckFragment extends Fragment implements View.OnClickListener {
     int year_x, mont_x, day_x;
     static final int DIALOG_ID = 0;
     private View views;
-    private Truck truck;
+    private Truck truck=null;
     private Documents documentGCTru, documentGCTra, documentWSTru,documentWSTra,documentEPTru,documentEPTra,documentTACHO,
             documentYSTra, documentPOLTru, documentPOLTra;
 
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        addActivity = (AddActivity) context;
 
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -69,7 +80,103 @@ public class AddTruckFragment extends Fragment implements View.OnClickListener {
 
         findUI(root);
         setListener();
+        if(addActivity.getTruck()!=null) {
+            truck = addActivity.getTruck();
+            getDoc();
+            setEditData();
+            delete.setVisibility(View.VISIBLE);
+        }else{
+            truck = new Truck();
+            truck.setUuidString();
+
+            documentGCTru = new Documents();
+            documentGCTru.setUuidString();
+            documentGCTru.setType(App.GCTru);
+
+            documentGCTra = new Documents();
+            documentGCTra.setUuidString();
+            documentGCTra.setType(App.GCTra);
+
+            documentWSTru = new Documents();
+            documentWSTru.setUuidString();
+            documentWSTru.setType(App.WSTru);
+
+            documentWSTra = new Documents();
+            documentWSTra.setType(App.WSTra);
+            documentWSTra.setUuidString();
+
+            documentEPTru = new Documents();
+            documentEPTru.setType(App.EPTru);
+            documentEPTru.setUuidString();
+
+            documentEPTra = new Documents();
+            documentEPTra.setUuidString();
+            documentEPTra.setType(App.EPTra);
+
+            documentTACHO = new Documents();
+            documentTACHO.setUuidString();
+            documentTACHO.setType(App.TACHO);
+
+            documentYSTra = new Documents();
+            documentYSTra.setUuidString();
+            documentYSTra.setType(App.YSTra);
+
+            documentPOLTru = new Documents();
+            documentPOLTru.setUuidString();
+            documentPOLTru.setType(App.POLTru);
+
+            documentPOLTra = new Documents();
+            documentPOLTra.setUuidString();
+            documentPOLTra.setType(App.POLTra);
+
+        }
         return root;
+    }
+
+    private void getDoc(){
+        for (Documents d:addActivity.getDocuments())
+            switch (d.getType()) {
+                case App.GCTru:
+                    documentGCTru = d;
+                    break;
+
+                case App.GCTra:
+                    documentGCTra = d;
+                    break;
+
+                case App.WSTru:
+                    documentWSTru = d;
+                    break;
+
+                case App.WSTra:
+                    documentWSTra = d;
+                    break;
+
+                case App.EPTru:
+                    documentEPTru =d;
+                    break;
+
+                case App.EPTra:
+                    documentEPTra = d;
+                    break;
+
+                case App.TACHO:
+                    documentTACHO = d;
+                    break;
+
+                case App.YSTra:
+                    documentYSTra = d;
+                    break;
+
+                case App.POLTru:
+                    documentPOLTru = d;
+                    break;
+
+                case App.POLTra:
+                    documentPOLTra = d;
+                    break;
+
+            }
     }
 
     private void findUI(View view) {
@@ -128,89 +235,58 @@ public class AddTruckFragment extends Fragment implements View.OnClickListener {
         delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                deleteAll();
             }
         });
 
 
     }
 
-    public void saveTruck(){
+    public void saveTruck() {
 
-      final List<Documents> documentsList = new ArrayList<>();
+        final List<Documents> documentsList = new ArrayList<>();
 
-        truck = new Truck();
-        truck.setUuidString();
         truck.setNomer(nomer.getText().toString());
         truck.setTrailerNomer(trailerNomer.getText().toString());
 
-        documentGCTru = new Documents();
-        documentGCTru.setUuidString();
+
         documentGCTru.setEndDate(greenCartDateTruck.getText().toString());
-        documentGCTru.setType(App.GCTru);
         documentGCTru.setPrice(greenCartPriceTruck.getText().toString());
         documentGCTru.setTruck(truck);
 
-        documentGCTra = new Documents();
-        documentGCTra.setUuidString();
         documentGCTra.setEndDate(greenCartDateTrailer.getText().toString());
-        documentGCTra.setType(App.GCTra);
         documentGCTra.setPrice(greenCartPriceTrailer.getText().toString());
         documentGCTra.setTruck(truck);
 
-        documentWSTru = new Documents();
-        documentWSTru.setUuidString();
         documentWSTru.setEndDate(certDateTruck.getText().toString());
-        documentWSTru.setType(App.WSTru);
         documentWSTru.setPrice(certPriceTruck.getText().toString());
         documentWSTru.setTruck(truck);
 
-        documentWSTra = new Documents();
-        documentWSTra.setUuidString();
         documentWSTra.setEndDate(certDateTrailer.getText().toString());
-        documentWSTra.setType(App.WSTra);
         documentWSTra.setPrice(certPriceTrailer.getText().toString());
         documentWSTra.setTruck(truck);
 
-        documentEPTru = new Documents();
-        documentEPTru.setUuidString();
         documentEPTru.setEndDate(europackDateTruck.getText().toString());
-        documentEPTru.setType(App.EPTru);
         documentEPTru.setPrice(europackPriceTruck.getText().toString());
         documentEPTru.setTruck(truck);
 
-        documentEPTra = new Documents();
-        documentEPTra.setUuidString();
         documentEPTra.setEndDate(europackDateTrailer.getText().toString());
-        documentEPTra.setType(App.EPTra);
         documentEPTra.setPrice(europackPriceTrailer.getText().toString());
         documentEPTra.setTruck(truck);
 
-        documentTACHO = new Documents();
-        documentTACHO.setUuidString();
         documentTACHO.setEndDate(tachoDateTruck.getText().toString());
-        documentTACHO.setType(App.TACHO);
         documentTACHO.setPrice(tachoPriceTruck.getText().toString());
         documentTACHO.setTruck(truck);
 
-        documentYSTra = new Documents();
-        documentYSTra.setUuidString();
         documentYSTra.setEndDate(svidDateTrailer.getText().toString());
-        documentYSTra.setType(App.YSTra);
         documentYSTra.setPrice(svidPriceTrailer.getText().toString());
         documentYSTra.setTruck(truck);
 
-        documentPOLTru = new Documents();
-        documentPOLTru.setUuidString();
         documentPOLTru.setEndDate(strachDateTruck.getText().toString());
-        documentPOLTru.setType(App.POLTru);
         documentPOLTru.setPrice(strachPriceTruck.getText().toString());
         documentPOLTru.setTruck(truck);
 
-        documentPOLTra = new Documents();
-        documentPOLTra.setUuidString();
         documentPOLTra.setEndDate(strachDateTrailer.getText().toString());
-        documentPOLTra.setType(App.POLTra);
         documentPOLTra.setPrice(strachPriceTrailer.getText().toString());
         documentPOLTra.setTruck(truck);
 
@@ -263,6 +339,92 @@ public class AddTruckFragment extends Fragment implements View.OnClickListener {
     }
 
 
+    private void setEditData() {
+        nomer.setText(truck.getNomer());
+        trailerNomer.setText(truck.getTrailerNomer());
 
+        greenCartDateTruck.setText(documentGCTru.getEndDate());
+        greenCartPriceTruck.setText(documentGCTru.getPrice());
+
+        greenCartDateTrailer.setText(documentGCTra.getEndDate());
+        greenCartPriceTrailer.setText(documentGCTra.getPrice());
+
+        certDateTruck.setText(documentWSTru.getEndDate());
+        certPriceTruck.setText(documentWSTru.getPrice());
+
+        certDateTrailer.setText(documentWSTra.getEndDate());
+        certPriceTrailer.setText(documentWSTra.getPrice());
+
+        europackDateTruck.setText(documentEPTru.getEndDate());
+        europackPriceTruck.setText(documentEPTru.getPrice());
+
+        europackDateTrailer.setText(documentEPTra.getEndDate());
+        europackPriceTrailer.setText(documentEPTra.getPrice());
+
+        tachoDateTruck.setText(documentTACHO.getEndDate());
+        tachoPriceTruck.setText(documentTACHO.getPrice());
+
+        svidDateTrailer.setText(documentYSTra.getEndDate());
+        svidPriceTrailer.setText(documentYSTra.getPrice());
+
+        strachDateTruck.setText(documentPOLTru.getEndDate());
+        strachPriceTruck.setText(documentPOLTru.getPrice());
+
+        strachDateTrailer.setText(documentPOLTra.getEndDate());
+        strachPriceTrailer.setText(documentPOLTra.getPrice());
+    }
+
+    public void deleteAll(){
+        deleteAllDocuments();
+    }
+
+    public void deleteAllReys(){
+        Reys.deleteAllInBackground(addActivity.getReyses(), new DeleteCallback() {
+            @Override
+            public void done(ParseException e) {
+                deleteAllOil();
+            }
+
+        });
+
+    }
+
+    public void deleteAllDocuments(){
+        Documents.deleteAllInBackground(addActivity.getDocuments(), new DeleteCallback() {
+            @Override
+            public void done(ParseException e) {
+                deleteAllReys();
+            }
+        });
+    }
+
+    public void deleteAllOil(){
+        Oil.deleteAllInBackground(addActivity.getOils(), new DeleteCallback() {
+            @Override
+            public void done(ParseException e) {
+                deleteAllService();
+            }
+        });
+    }
+
+    public void deleteAllService(){
+        Servis.deleteAllInBackground(addActivity.getServices(),  new DeleteCallback() {
+            @Override
+            public void done(ParseException e) {
+                deleteTruck();
+            }
+
+            });
+
+    }
+
+    public void deleteTruck(){
+        truck.deleteEventually(new DeleteCallback() {
+            @Override
+            public void done(ParseException e) {
+                getActivity().finish();
+            }
+        });
+    }
 
 }

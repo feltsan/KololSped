@@ -126,6 +126,7 @@ public class AllServiceFragment extends Fragment implements View.OnClickListener
     private void openEditView(Servis servis) {
         Intent i = new Intent(detailActivity, AddActivity.class);
         i.putExtra("ID", servis.getUuidString());
+        i.putExtra("CODE", App.EDIT_SERVICE_CODE);
         startActivityForResult(i, App.EDIT_TRUCK_CODE);
     }
 

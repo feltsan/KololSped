@@ -23,6 +23,10 @@ public class App extends Application{
     public static final int NEW_TRUCK_CODE = 500;
     public static final int DETAIL_TRUCK_CODE = 600;
     public static final int EDIT_TRUCK_CODE = 700;
+    public static final int EDIT_REYS_CODE = 800;
+    public static final int EDIT_OIL_CODE = 900;
+    public static final int EDIT_SERVICE_CODE = 1000;
+
     public static final String DATE_VIEW = "VIEW";
     public static final int GCTru = 1;
     public static final int GCTra = 2;

@@ -67,6 +67,15 @@ public class Oil extends ParseObject {
         put("uuid", uuid.toString());
     }
 
+    public void setInform(boolean inform){
+        put("inform", inform);
+    }
+
+    public boolean isInform(){
+        return getBoolean("inform");
+    }
+
+
     public String getUuidString() {
         return getString("uuid");
     }
