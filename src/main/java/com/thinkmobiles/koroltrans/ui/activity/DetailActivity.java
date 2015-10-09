@@ -25,10 +25,8 @@ public class DetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add);
 
-        if(savedInstanceState!=null){
-            truckId = savedInstanceState.getString(App.TRUCK_ID);
-            getTruckOF();
-        }else if (getIntent().hasExtra("ID")) {
+
+        if (getIntent().hasExtra("ID")) {
             truckId = getIntent().getExtras().getString("ID");
             getTruckOF();
 
@@ -63,11 +61,5 @@ public class DetailActivity extends AppCompatActivity {
         return truck;
     }
 
-    @Override
-    public void onSaveInstanceState(Bundle savedInstanceState) {
-        // Save the user's current game state
-        savedInstanceState.putString(App.TRUCK_ID, truckId);
-        // Always call the superclass so it can save the view hierarchy state
-        super.onSaveInstanceState(savedInstanceState);
-    }
+
 }

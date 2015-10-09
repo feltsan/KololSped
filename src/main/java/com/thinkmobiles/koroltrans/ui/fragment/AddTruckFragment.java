@@ -376,55 +376,65 @@ public class AddTruckFragment extends Fragment implements View.OnClickListener {
 
     public void deleteAll(){
         deleteAllDocuments();
+        deleteTruck();
     }
 
-    public void deleteAllReys(){
-        Reys.deleteAllInBackground(addActivity.getReyses(), new DeleteCallback() {
-            @Override
-            public void done(ParseException e) {
-                deleteAllOil();
-            }
-
-        });
-
-    }
+//    public void deleteAllReys(){
+//        Reys.deleteAllInBackground(addActivity.getReyses(), new DeleteCallback() {
+//            @Override
+//            public void done(ParseException e) {
+//                deleteAllOil();
+//            }
+//
+//        });
+//
+//    }
 
     public void deleteAllDocuments(){
-        Documents.deleteAllInBackground(addActivity.getDocuments(), new DeleteCallback() {
-            @Override
-            public void done(ParseException e) {
-                deleteAllReys();
-            }
-        });
+
+        for (Documents d : addActivity.getDocuments())
+            d.deleteEventually();
+
+        for (Reys r : addActivity.getReyses())
+            r.deleteEventually();
+
+        for (Oil o : addActivity.getOils())
+            o.deleteEventually();
+
+        for (Servis s : addActivity.getServices())
+            s.deleteEventually();
+
+//        Documents.deleteAllInBackground(addActivity.getDocuments(), new DeleteCallback() {
+//            @Override
+//            public void done(ParseException e) {
+//                deleteAllReys();
+//            }
+//        });
     }
 
-    public void deleteAllOil(){
-        Oil.deleteAllInBackground(addActivity.getOils(), new DeleteCallback() {
-            @Override
-            public void done(ParseException e) {
-                deleteAllService();
-            }
-        });
-    }
+//    public void deleteAllOil(){
+//        Oil.deleteAllInBackground(addActivity.getOils(), new DeleteCallback() {
+//            @Override
+//            public void done(ParseException e) {
+//                deleteAllService();
+//            }
+//        });
+//    }
+//
+//    public void deleteAllService(){
+//        Servis.deleteAllInBackground(addActivity.getServices(),  new DeleteCallback() {
+//            @Override
+//            public void done(ParseException e) {
+//
+//            }
+//
+//            });
 
-    public void deleteAllService(){
-        Servis.deleteAllInBackground(addActivity.getServices(),  new DeleteCallback() {
-            @Override
-            public void done(ParseException e) {
-                deleteTruck();
-            }
-
-            });
-
-    }
+//    }
 
     public void deleteTruck(){
-        truck.deleteEventually(new DeleteCallback() {
-            @Override
-            public void done(ParseException e) {
-                getActivity().finish();
-            }
-        });
+        truck.deleteEventually();
+        addActivity.finish();
     }
 
 }
