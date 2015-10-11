@@ -17,6 +17,7 @@ import com.parse.SaveCallback;
 import com.thinkmobiles.koroltrans.App;
 import com.thinkmobiles.koroltrans.R;
 import com.thinkmobiles.koroltrans.model.Oil;
+import com.thinkmobiles.koroltrans.model.Reys;
 import com.thinkmobiles.koroltrans.ui.activity.AddActivity;
 
 /**
@@ -29,6 +30,7 @@ public class AddOilFragment extends Fragment implements View.OnClickListener {
     private EditText distance, brend, oilFilter, airFilter, fuelFilter, glagoDel, price, service;
     private Button save, delete;
     private AddActivity addActivity;
+    private Oil oil = null;
 
 
     @Override
@@ -42,6 +44,21 @@ public class AddOilFragment extends Fragment implements View.OnClickListener {
         view = inflater.inflate(R.layout.fragment_add_oil, container, false);
         findUI(view);
         setListener();
+
+        if(savedInstanceState!=null){
+            oil = (Oil) savedInstanceState.getSerializable("Oil");
+            setEditData();
+            delete.setVisibility(View.VISIBLE);
+        }else if(addActivity.getOil()!=null) {
+            oil = addActivity.getOil();
+            setEditData();
+            delete.setVisibility(View.VISIBLE);
+        }else {
+            oil = new Oil();
+            oil.setUuidString();
+            oil.setTruck(addActivity.getTruck());
+        }
+
         return view;
     }
 
@@ -79,7 +96,7 @@ public class AddOilFragment extends Fragment implements View.OnClickListener {
                 break;
 
             case R.id.delete:
-
+                deleteOil();
                 break;
         }
 
@@ -94,8 +111,6 @@ public class AddOilFragment extends Fragment implements View.OnClickListener {
     }
 
     public void saveOil(){
-        Oil oil = new Oil();
-        oil.setTruck(addActivity.getTruck());
         oil.setDate(date.getText().toString());
         oil.setDistance(distance.getText().toString());
         oil.setBrend(brend.getText().toString());
@@ -112,5 +127,28 @@ public class AddOilFragment extends Fragment implements View.OnClickListener {
                 getActivity().finish();
             }
         });
+    }
+
+    private void setEditData() {
+        date.setText(oil.getDate());
+        distance.setText(oil.getDistance());
+        brend.setText(oil.getBrend());
+        oilFilter.setText(oil.getOilFiter());
+        airFilter.setText(oil.getAirFilter());
+        fuelFilter.setText(oil.getFuelFilter());
+        price.setText(oil.getPrice());
+        glagoDel.setText(oil.getGlagoDel());
+        service.setText(oil.getService());
+    }
+
+    public void deleteOil(){
+        oil.deleteEventually();
+        addActivity.finish();
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putSerializable("Oil", oil);
     }
 }

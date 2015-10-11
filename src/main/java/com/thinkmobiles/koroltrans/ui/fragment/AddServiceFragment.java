@@ -15,6 +15,8 @@ import com.parse.ParseException;
 import com.parse.SaveCallback;
 import com.thinkmobiles.koroltrans.App;
 import com.thinkmobiles.koroltrans.R;
+import com.thinkmobiles.koroltrans.model.Oil;
+import com.thinkmobiles.koroltrans.model.Reys;
 import com.thinkmobiles.koroltrans.model.Servis;
 import com.thinkmobiles.koroltrans.ui.activity.AddActivity;
 
@@ -28,6 +30,7 @@ public class AddServiceFragment extends Fragment implements View.OnClickListener
     private EditText distance, zapchast, brend, price, service;
     private Button save, delete;
     private AddActivity addActivity;
+    private Servis servis = null;
 
 
     @Override
@@ -42,6 +45,21 @@ public class AddServiceFragment extends Fragment implements View.OnClickListener
         view = inflater.inflate(R.layout.fragment_add_service, container, false);
         findUI(view);
         setListener();
+
+        if(savedInstanceState!=null){
+            servis = (Servis) savedInstanceState.getSerializable("Service");
+            setEditData();
+            delete.setVisibility(View.VISIBLE);
+        }else if(addActivity.getServis()!=null) {
+            servis = addActivity.getServis();
+            setEditData();
+            delete.setVisibility(View.VISIBLE);
+        }else {
+            servis = new Servis();
+            servis.setUuidString();
+            servis.setTruck(addActivity.getTruck());
+        }
+
         return view;
     }
 
@@ -77,7 +95,7 @@ public class AddServiceFragment extends Fragment implements View.OnClickListener
                 break;
 
             case R.id.delete:
-
+                deleteService();
                 break;
 
         }
@@ -93,8 +111,6 @@ public class AddServiceFragment extends Fragment implements View.OnClickListener
     }
 
     public void save(){
-        Servis servis = new Servis();
-        servis.setTruck(addActivity.getTruck());
         servis.setDate(date.getText().toString());
         servis.setDistance(distance.getText().toString());
         servis.setBrend(brend.getText().toString());
@@ -108,6 +124,26 @@ public class AddServiceFragment extends Fragment implements View.OnClickListener
                 getActivity().finish();
             }
         });
+    }
+
+    private void setEditData() {
+        date.setText(servis.getDate());
+        distance.setText(servis.getDistance());
+        brend.setText(servis.getBrend());
+        zapchast.setText(servis.getZapchast());
+        price.setText(servis.getPrice());
+        service.setText(servis.getService());
+    }
+
+    public void deleteService(){
+        servis.deleteEventually();
+        addActivity.finish();
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putSerializable("Service", servis);
     }
 
 }

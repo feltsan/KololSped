@@ -217,7 +217,8 @@
         android:id="@+id/oilList"
         android:layout_below="@id/allOilTable"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_above="@+id/fab">
 
     </ListView>
 

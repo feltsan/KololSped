@@ -114,7 +114,7 @@ public class AllOilFragment extends Fragment implements View.OnClickListener,Ada
                 ParseQuery<Oil> query = Oil.getQuery();
                 query.include("truck");
                 query.whereEqualTo("truck", detailActivity.getTruck());
-                query.orderByDescending("createdAt");
+                query.orderByAscending("createdAt");
                 query.fromLocalDatastore();
                 return query;
             }
@@ -134,3 +134,5 @@ public class AllOilFragment extends Fragment implements View.OnClickListener,Ada
         startActivityForResult(i, App.EDIT_TRUCK_CODE);
     }
 }
+
+

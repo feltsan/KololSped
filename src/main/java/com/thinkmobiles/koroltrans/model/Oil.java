@@ -4,6 +4,7 @@ import com.parse.ParseClassName;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 
+import java.io.Serializable;
 import java.util.UUID;
 
 /**
@@ -11,7 +12,7 @@ import java.util.UUID;
  */
 
 @ParseClassName("Oil")
-public class Oil extends ParseObject {
+public class Oil extends ParseObject implements Serializable {
     public Oil() {
         super();
     }

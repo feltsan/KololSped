@@ -20,6 +20,7 @@ import com.thinkmobiles.koroltrans.App;
 import com.thinkmobiles.koroltrans.R;
 import com.thinkmobiles.koroltrans.adapters.ReysAdapter;
 import com.thinkmobiles.koroltrans.adapters.TruckAdapter;
+import com.thinkmobiles.koroltrans.model.Oil;
 import com.thinkmobiles.koroltrans.model.Reys;
 import com.thinkmobiles.koroltrans.model.Truck;
 import com.thinkmobiles.koroltrans.ui.activity.AddActivity;
@@ -30,7 +31,7 @@ import java.util.List;
 /**
  * Created by john on 04.10.15.
  */
-public class AllReysFragment extends Fragment implements View.OnClickListener,AdapterView.OnItemLongClickListener {
+public class AllReysFragment extends Fragment implements View.OnClickListener,AdapterView.OnItemLongClickListener{
 
     private ListView reysList;
     private FloatingActionButton fab;
@@ -82,7 +83,7 @@ public class AllReysFragment extends Fragment implements View.OnClickListener,Ad
 
     @Override
     public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-        openEditView(reysAdapter.getItem(position));
+//        openEditView(reysAdapter.getItem(position));
         return false;
     }
 
@@ -95,12 +96,7 @@ public class AllReysFragment extends Fragment implements View.OnClickListener,Ad
         startActivityForResult(i, App.REYS_CODE);
     }
 
-    private void openEditView(Reys reys) {
-        Intent i = new Intent(detailActivity, AddActivity.class);
-        i.putExtra("ID", reys.getUuidString());
-        i.putExtra("CODE", App.EDIT_REYS_CODE);
-        startActivityForResult(i, App.EDIT_TRUCK_CODE);
-    }
+
 
     public void setAdapter() {
         setFactory();
@@ -128,7 +124,7 @@ public class AllReysFragment extends Fragment implements View.OnClickListener,Ad
                 ParseQuery<Reys> query = Reys.getQuery();
                 query.include("truck");
                 query.whereEqualTo("truck", detailActivity.getTruck());
-                query.orderByDescending("createdAt");
+                query.orderByAscending("createdAt");
                 query.fromLocalDatastore();
                 return query;
             }

@@ -37,7 +37,8 @@
                 android:layout_weight="1"
                 android:background="@android:color/white"
                 android:gravity="center"
-                android:textColor="@android:color/black" />
+                android:textColor="@android:color/black"
+                android:singleLine="false" />
 
 
 
@@ -57,7 +58,7 @@
                 android:background="@android:color/white"
                 android:gravity="center"
                 android:textColor="@android:color/black"
-                android:singleLine="true" />
+                android:singleLine="false" />
 
             <TextView
                 android:id="@+id/zapchastService"
@@ -74,7 +75,8 @@
                 android:layout_weight="1"
                 android:background="@android:color/white"
                 android:gravity="center"
-                android:textColor="@android:color/black" />
+                android:textColor="@android:color/black"
+                android:singleLine="false" />
 
             <TextView
                 android:id="@+id/brendService"
@@ -91,7 +93,8 @@
                 android:layout_weight="1"
                 android:background="@android:color/white"
                 android:gravity="center"
-                android:textColor="@android:color/black" />
+                android:textColor="@android:color/black"
+                android:singleLine="false" />
 
             <TextView
                 android:id="@+id/priceBrend"
@@ -108,7 +111,8 @@
                 android:layout_weight="1"
                 android:background="@android:color/white"
                 android:gravity="center"
-                android:textColor="@android:color/black" />
+                android:textColor="@android:color/black"
+                android:singleLine="false" />
 
             <TextView
                 android:id="@+id/serviceName"
@@ -125,7 +129,8 @@
                 android:layout_weight="1"
                 android:background="@android:color/white"
                 android:gravity="center"
-                android:textColor="@android:color/black" />
+                android:textColor="@android:color/black"
+                android:singleLine="false" />
 
 
         </TableRow>

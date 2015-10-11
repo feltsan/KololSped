@@ -15,7 +15,9 @@ import com.parse.ParseException;
 import com.parse.SaveCallback;
 import com.thinkmobiles.koroltrans.App;
 import com.thinkmobiles.koroltrans.R;
+import com.thinkmobiles.koroltrans.model.Documents;
 import com.thinkmobiles.koroltrans.model.Reys;
+import com.thinkmobiles.koroltrans.model.Truck;
 import com.thinkmobiles.koroltrans.ui.activity.AddActivity;
 
 /**
@@ -28,6 +30,7 @@ public class AddReysFragment extends Fragment implements View.OnClickListener {
     private EditText start, finish, spedition, price;
     private Button save, delete;
     private AddActivity addActivity;
+    private Reys reys= null;
 
 
     @Override
@@ -41,6 +44,21 @@ public class AddReysFragment extends Fragment implements View.OnClickListener {
         view = inflater.inflate(R.layout.fragment_add_reys, container, false);
         findUI(view);
         setListener();
+
+        if(savedInstanceState!=null){
+            reys = (Reys) savedInstanceState.getSerializable("Reys");
+            setEditData();
+            delete.setVisibility(View.VISIBLE);
+        }else if(addActivity.getReys()!=null) {
+            reys = addActivity.getReys();
+            setEditData();
+            delete.setVisibility(View.VISIBLE);
+        }else {
+            reys = new Reys();
+            reys.setUuidString();
+            reys.setTruck(addActivity.getTruck());
+        }
+
         return view;
     }
 
@@ -76,7 +94,7 @@ public class AddReysFragment extends Fragment implements View.OnClickListener {
                 break;
 
             case R.id.delete:
-
+                deleteReys();
                 break;
 
         }
@@ -92,8 +110,6 @@ public class AddReysFragment extends Fragment implements View.OnClickListener {
     }
 
     private void saveReys(){
-        Reys reys = new Reys();
-        reys.setTruck(addActivity.getTruck());
         reys.setDate(date.getText().toString());
         reys.setStart(start.getText().toString());
         reys.setFinish(finish.getText().toString());
@@ -106,5 +122,24 @@ public class AddReysFragment extends Fragment implements View.OnClickListener {
                 getActivity().finish();
             }
         });
+    }
+
+    private void setEditData() {
+        date.setText(reys.getDate());
+        start.setText(reys.getStart());
+        finish.setText(reys.getFinish());
+        spedition.setText(reys.getClient());
+        price.setText(reys.getPrice());
+    }
+
+    public void deleteReys(){
+       reys.deleteEventually();
+        addActivity.finish();
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putSerializable("Reys",reys);
     }
 }

@@ -37,7 +37,8 @@
                 android:layout_weight="1"
                 android:background="@android:color/white"
                 android:gravity="center"
-                android:textColor="@android:color/black" />
+                android:textColor="@android:color/black"
+                android:singleLine="false" />
 
 
 
@@ -57,7 +58,7 @@
                 android:background="@android:color/white"
                 android:gravity="center"
                 android:textColor="@android:color/black"
-                android:singleLine="true" />
+                android:singleLine="false" />
 
             <TextView
                 android:id="@+id/oilBrend"
@@ -74,7 +75,8 @@
                 android:layout_weight="1"
                 android:background="@android:color/white"
                 android:gravity="center"
-                android:textColor="@android:color/black" />
+                android:textColor="@android:color/black"
+                android:singleLine="false" />
 
             <TextView
                 android:id="@+id/oilFilter"
@@ -91,7 +93,8 @@
                 android:layout_weight="1"
                 android:background="@android:color/white"
                 android:gravity="center"
-                android:textColor="@android:color/black" />
+                android:textColor="@android:color/black"
+                android:singleLine="false" />
 
             <TextView
                 android:id="@+id/airFilter"
@@ -108,7 +111,8 @@
                 android:layout_weight="1"
                 android:background="@android:color/white"
                 android:gravity="center"
-                android:textColor="@android:color/black" />
+                android:textColor="@android:color/black"
+                android:singleLine="false" />
 
             <TextView
                 android:id="@+id/fuelfilter"
@@ -125,7 +129,8 @@
                 android:layout_weight="1"
                 android:background="@android:color/white"
                 android:gravity="center"
-                android:textColor="@android:color/black" />
+                android:textColor="@android:color/black"
+                android:singleLine="false" />
 
             <TextView
                 android:id="@+id/glagoDel"
@@ -142,7 +147,8 @@
                 android:layout_weight="1"
                 android:background="@android:color/white"
                 android:gravity="center"
-                android:textColor="@android:color/black" />
+                android:textColor="@android:color/black"
+                android:singleLine="false" />
 
             <TextView
                 android:id="@+id/priceOil"
@@ -159,7 +165,8 @@
                 android:layout_weight="1"
                 android:background="@android:color/white"
                 android:gravity="center"
-                android:textColor="@android:color/black" />
+                android:textColor="@android:color/black"
+                android:singleLine="false" />
             <TextView
                 android:id="@+id/serviceOil"
                 android:layout_width="0dp"
@@ -175,7 +182,8 @@
                 android:layout_weight="1"
                 android:background="@android:color/white"
                 android:gravity="center"
-                android:textColor="@android:color/black" />
+                android:textColor="@android:color/black"
+                android:singleLine="false" />
 
         </TableRow>
     </TableLayout>

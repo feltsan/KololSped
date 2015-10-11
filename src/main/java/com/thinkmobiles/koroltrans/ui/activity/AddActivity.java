@@ -89,6 +89,7 @@ public class AddActivity extends AppCompatActivity {
             @Override
             public void done(Reys object, ParseException e) {
                 reys = object;
+                truck = object.getTruck();
                 setTitle(reys.getTruck().getNomer());
                 openFragment(fragment);
             }
@@ -103,6 +104,7 @@ public class AddActivity extends AppCompatActivity {
             @Override
             public void done(Oil object, ParseException e) {
                 oil = object;
+                truck = object.getTruck();
                 setTitle(oil.getTruck().getNomer());
                 openFragment(fragment);
             }
@@ -117,6 +119,7 @@ public class AddActivity extends AppCompatActivity {
             @Override
             public void done(Servis object, ParseException e) {
                 servis = object;
+                truck = object.getTruck();
                 setTitle(servis.getTruck().getNomer());
                 openFragment(fragment);
             }

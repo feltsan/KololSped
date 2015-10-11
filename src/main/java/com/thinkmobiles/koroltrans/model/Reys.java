@@ -4,6 +4,7 @@ import com.parse.ParseClassName;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 
+import java.io.Serializable;
 import java.util.UUID;
 
 /**
@@ -11,7 +12,7 @@ import java.util.UUID;
  */
 
 @ParseClassName("Reys")
-public class Reys extends ParseObject {
+public class Reys extends ParseObject implements Serializable {
     public Reys() {
         super();
     }

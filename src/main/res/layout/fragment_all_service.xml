@@ -158,7 +158,8 @@
         android:id="@+id/serviceList"
         android:layout_below="@id/serviceTable"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_above="@+id/fab">
 
     </ListView>
 
