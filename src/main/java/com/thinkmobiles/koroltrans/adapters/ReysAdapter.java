@@ -23,7 +23,8 @@ import com.thinkmobiles.koroltrans.ui.activity.DetailActivity;
 public class ReysAdapter extends ParseQueryAdapter<Reys> {
 
     private LayoutInflater inflater;
-    int count=0;
+
+    int pos=0;
     private DetailActivity detailActivity;
 
     public ReysAdapter(Context context,
@@ -37,8 +38,16 @@ public class ReysAdapter extends ParseQueryAdapter<Reys> {
     }
 
     @Override
+    public Reys getItem(int index) {
+        pos =index+1;
+        return super.getItem(index);
+
+    }
+
+    @Override
     public View getItemView(final Reys reys, View view, ViewGroup parent) {
         ViewHolder holder;
+
         if (view == null) {
             view = inflater.inflate(R.layout.item_reys,parent, false);
             holder = new ViewHolder();
@@ -49,10 +58,15 @@ public class ReysAdapter extends ParseQueryAdapter<Reys> {
             holder.client = (TextView) view.findViewById(R.id.client);
             holder.price = (TextView) view.findViewById(R.id.priceSpedition);
             holder.confirm = (CheckBox) view.findViewById(R.id.confirmReys);
+            holder.nomer =  (TextView) view.findViewById(R.id.nomer);
+//            pos++;
             view.setTag(holder);
         } else {
             holder = (ViewHolder) view.getTag();
         }
+
+        super.getItemView(reys, view, parent);
+
         TextView date = holder.date;
         TextView start = holder.start;
         TextView finish = holder.finish;
@@ -60,12 +74,15 @@ public class ReysAdapter extends ParseQueryAdapter<Reys> {
         TextView price = holder.price;
         final CheckBox confirm = holder.confirm;
         RelativeLayout layout = holder.layout;
+        TextView nomer = holder.nomer;
 
         date.setText(reys.getDate());
         start.setText(reys.getStart());
         finish.setText(reys.getFinish());
         client.setText(reys.getClient());
         price.setText(reys.getPrice());
+        nomer.setText(String.valueOf(pos));
+
         confirm.setChecked(reys.getConfirm());
         confirm.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -86,6 +103,8 @@ public class ReysAdapter extends ParseQueryAdapter<Reys> {
         return view;
     }
 
+
+
     private void openEditView(Reys reys) {
         Intent i = new Intent(detailActivity, AddActivity.class);
         i.putExtra("ID", reys.getUuidString());
@@ -93,22 +112,15 @@ public class ReysAdapter extends ParseQueryAdapter<Reys> {
         detailActivity.startActivityForResult(i, App.EDIT_TRUCK_CODE);
     }
 
-    @Override
-    public boolean isEmpty() {
-        return super.isEmpty();
-
-    }
-
     private static class ViewHolder {
         RelativeLayout layout;
         TextView date;
+        TextView nomer;
         TextView start;
         TextView finish;
         TextView client;
         TextView price;
         CheckBox confirm;
     }
-    public int getCou(){
-        return count;
-    }
+
 }

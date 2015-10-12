@@ -1,5 +1,6 @@
 package com.thinkmobiles.koroltrans.ui.activity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -95,6 +96,25 @@ public class DetailActivity extends AppCompatActivity {
         Sender.sendSMS(this, "+380979330846", "АО7555ВН Зелена карта 18.10.15 " +
                 "АО1441АХ Заміна масла");
         startActivityForResult(new Intent(this, InviteActivity.class), 55);
+    }
+
+    public AllReysFragment getMyFragment(){
+        return (AllReysFragment)
+                getSupportFragmentManager()
+                .findFragmentByTag("ALL");
+    }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (resultCode == Activity.RESULT_OK) {
+            if (requestCode == App.REYS_CODE) {
+                // Coming back from the edit view, update the view
+               getMyFragment().refreshAdapter();
+            }
+        }
     }
 
 

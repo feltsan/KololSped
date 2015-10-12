@@ -67,7 +67,7 @@ public class AllReysFragment extends Fragment implements View.OnClickListener,Ad
     @Override
     public void onResume() {
         super.onResume();
-        reysAdapter.loadObjects();
+        refreshAdapter();
 
     }
 
@@ -96,6 +96,12 @@ public class AllReysFragment extends Fragment implements View.OnClickListener,Ad
         startActivityForResult(i, App.REYS_CODE);
     }
 
+    public  void refreshAdapter(){
+        reysAdapter.loadObjects();
+
+    }
+
+
 
 
     public void setAdapter() {
@@ -112,6 +118,7 @@ public class AllReysFragment extends Fragment implements View.OnClickListener,Ad
             public void onLoaded(List<Reys> objects, Exception e) {
                 if(objects.size()>0)
                     tableLayout.setVisibility(View.VISIBLE);
+
             }
         });
         reysList.setAdapter(reysAdapter);
@@ -129,5 +136,11 @@ public class AllReysFragment extends Fragment implements View.OnClickListener,Ad
                 return query;
             }
         };
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        refreshAdapter();
     }
 }

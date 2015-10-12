@@ -1,5 +1,6 @@
 package com.thinkmobiles.koroltrans.ui.fragment;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
@@ -119,6 +120,7 @@ public class AddReysFragment extends Fragment implements View.OnClickListener {
         reys.pinInBackground(new SaveCallback() {
             @Override
             public void done(ParseException e) {
+                getActivity().setResult(Activity.RESULT_OK);
                 getActivity().finish();
             }
         });

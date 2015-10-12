@@ -1,14 +1,19 @@
 package com.thinkmobiles.koroltrans.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.parse.ParseQueryAdapter;
+import com.thinkmobiles.koroltrans.App;
 import com.thinkmobiles.koroltrans.R;
 import com.thinkmobiles.koroltrans.model.Servis;
+import com.thinkmobiles.koroltrans.ui.activity.AddActivity;
+import com.thinkmobiles.koroltrans.ui.activity.DetailActivity;
 
 /**
  * Created by john on 04.10.15.
@@ -16,6 +21,7 @@ import com.thinkmobiles.koroltrans.model.Servis;
 public class ServiceAdapter extends ParseQueryAdapter<Servis> {
 
     private LayoutInflater inflater;
+    private DetailActivity detailActivity;
 
     public ServiceAdapter(Context context,
                           ParseQueryAdapter.QueryFactory<Servis> queryFactory) {
@@ -23,10 +29,11 @@ public class ServiceAdapter extends ParseQueryAdapter<Servis> {
 
         inflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        detailActivity = (DetailActivity) context;
     }
 
     @Override
-    public View getItemView(Servis service, View view, ViewGroup parent) {
+    public View getItemView(final Servis service, View view, ViewGroup parent) {
         ViewHolder holder;
         if (view == null) {
             view = inflater.inflate(R.layout.item_service, parent, false);
@@ -37,6 +44,7 @@ public class ServiceAdapter extends ParseQueryAdapter<Servis> {
             holder.zapchast = (TextView) view.findViewById(R.id.zapchastService);
             holder.price = (TextView) view.findViewById(R.id.priceBrend);
             holder.service = (TextView) view.findViewById(R.id.serviceName);
+            holder.layout = (RelativeLayout) view.findViewById(R.id.layout);
 
             view.setTag(holder);
         } else {
@@ -48,6 +56,7 @@ public class ServiceAdapter extends ParseQueryAdapter<Servis> {
         TextView zapchast = holder.zapchast;
         TextView price = holder.price;
         TextView servis = holder.service;
+        RelativeLayout layout = holder.layout;
 
         date.setText(service.getDate());
         distance.setText(service.getDistance());
@@ -56,11 +65,27 @@ public class ServiceAdapter extends ParseQueryAdapter<Servis> {
         price.setText(service.getPrice());
         servis.setText(service.getService());
 
+        layout.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                openEditView(service);
+                return false;
+            }
+        });
+
         return view;
+    }
+
+    private void openEditView(Servis servis) {
+        Intent i = new Intent(detailActivity, AddActivity.class);
+        i.putExtra("ID", servis.getUuidString());
+        i.putExtra("CODE", App.EDIT_SERVICE_CODE);
+        detailActivity.startActivityForResult(i, App.EDIT_TRUCK_CODE);
     }
 
 
     private static class ViewHolder {
+        RelativeLayout layout;
         TextView date;
         TextView distance;
         TextView zapchast;

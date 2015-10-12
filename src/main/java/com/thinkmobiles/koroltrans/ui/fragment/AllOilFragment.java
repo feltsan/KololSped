@@ -73,7 +73,7 @@ public class AllOilFragment extends Fragment implements View.OnClickListener,Ada
 
     @Override
     public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-        openEditView(oilAdapter.getItem(position));
+//        openEditView(oilAdapter.getItem(position));
         return false;
     }
 
@@ -127,11 +127,14 @@ public class AllOilFragment extends Fragment implements View.OnClickListener,Ada
         oilAdapter.loadObjects();
     }
 
-    private void openEditView(Oil oil) {
-        Intent i = new Intent(detailActivity, AddActivity.class);
-        i.putExtra("ID", oil.getUuidString());
-        i.putExtra("CODE", App.EDIT_OIL_CODE);
-        startActivityForResult(i, App.EDIT_TRUCK_CODE);
+    public  void refreshAdapter(){
+        oilAdapter.loadObjects();
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        refreshAdapter();
     }
 }
 

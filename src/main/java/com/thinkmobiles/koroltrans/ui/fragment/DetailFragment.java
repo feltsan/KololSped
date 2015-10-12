@@ -73,7 +73,7 @@ public class DetailFragment extends Fragment implements View.OnClickListener {
         if(orient==1)
             getActivity().getSupportFragmentManager()
                     .beginTransaction()
-                    .replace(R.id.add_container, fragment)
+                    .replace(R.id.add_container, fragment,"ALL")
                     .addToBackStack("")
                     .commit();
         else

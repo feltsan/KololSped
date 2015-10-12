@@ -52,7 +52,7 @@ public class AllTruckActivity extends AppCompatActivity implements View.OnClickL
     @Override
     protected void onResume() {
         super.onResume();
-            truckAdapter.loadObjects();
+//            truckAdapter.loadObjects();
 //        ParseQuery<Truck> query = ParseQuery.getQuery(Truck.class);
 //        query.fromLocalDatastore();
 //        query.findInBackground(new FindCallback<Truck>() {
@@ -140,13 +140,8 @@ public class AllTruckActivity extends AppCompatActivity implements View.OnClickL
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
-        if (resultCode == Activity.RESULT_OK) {
-            if (requestCode == App.NEW_TRUCK_CODE) {
-                // Coming back from the edit view, update the view
                 truckAdapter.loadObjects();
-            }
-        }
+
     }
 
 

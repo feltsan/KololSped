@@ -70,7 +70,7 @@ public class AllServiceFragment extends Fragment implements View.OnClickListener
 
     @Override
     public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-        openEditView(serviceAdapter.getItem(position));
+//        openEditView(serviceAdapter.getItem(position));
         return false;
     }
 
@@ -123,11 +123,14 @@ public class AllServiceFragment extends Fragment implements View.OnClickListener
         super.onResume();
         serviceAdapter.loadObjects();
     }
-    private void openEditView(Servis servis) {
-        Intent i = new Intent(detailActivity, AddActivity.class);
-        i.putExtra("ID", servis.getUuidString());
-        i.putExtra("CODE", App.EDIT_SERVICE_CODE);
-        startActivityForResult(i, App.EDIT_TRUCK_CODE);
+
+    public  void refreshAdapter(){
+       serviceAdapter.loadObjects();
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        refreshAdapter();
+    }
 }
