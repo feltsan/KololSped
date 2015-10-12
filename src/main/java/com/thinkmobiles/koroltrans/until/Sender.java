@@ -6,8 +6,20 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.os.AsyncTask;
 import android.telephony.gsm.SmsManager;
+import android.util.Log;
 import android.widget.Toast;
+
+import java.util.Properties;
+
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 
 /**
  * Created by john on 09.10.15.
@@ -15,27 +27,60 @@ import android.widget.Toast;
 public abstract class Sender {
 
 
-        public void sendSMS(Context context, String phoneNo, String msg){
-            try {
-                SmsManager smsManager = SmsManager.getDefault();
-                smsManager.sendTextMessage(phoneNo, null, msg, null, null);
-                Toast.makeText(context, "Message Sent",
-                        Toast.LENGTH_LONG).show();
-            } catch (Exception ex) {
-                Toast.makeText(context,ex.getMessage().toString(),
-                        Toast.LENGTH_LONG).show();
-                ex.printStackTrace();
+    public static void sendSMS(Context context, String phoneNo, String msg) {
+        try {
+            SmsManager smsManager = SmsManager.getDefault();
+            smsManager.sendTextMessage(phoneNo, null, msg, null, null);
+            Toast.makeText(context, "Message Sent",
+                    Toast.LENGTH_LONG).show();
+        } catch (Exception ex) {
+            Toast.makeText(context, ex.getMessage().toString(),
+                    Toast.LENGTH_LONG).show();
+            ex.printStackTrace();
 
         }
     }
-    public void sendEmail(Context context, String phoneNo, String msg) {
-//        GMailSender sender = new GMailSender("username@gmail.com", "password");
-//        sender.sendMail("This is Subject",
-//                "This is Body",
-//                "user@gmail.com",
-//                "user@yahoo.com");
 
-    }
+    public static void sendEmail(String msg) {
+        Properties props = new Properties();
+        props.put("mail.smtp.host", "smtp.gmail.com");
+        props.put("mail.smtp.socketFactory.port", "465");
+        props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+        props.put("mail.smtp.auth", "true");
+        props.put("mail.smtp.port", "465");
+
+        Session session = Session.getDefaultInstance(props, new javax.mail.Authenticator() {
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication("program.korol@gmail.com", "ao1441ax");
+            }
+        });
+
+        try {
+            final Message message = new MimeMessage(session);
+            message.setFrom(new InternetAddress("program.korol@gmail.com"));
+            message.setRecipients(Message.RecipientType.TO, InternetAddress.parse("ivan-korol.m@mail.ru"));
+            message.setSubject("ЗАКІНЧУЄТЬСЯ ТЕРМІН ДІЇ!");
+            message.setContent("АО7555ВН Зелена карта 18.10.15 " +
+                    " АО1441АХ Заміна масла ", "text/html; charset=utf-8");
+
+            Thread thread = new Thread(new Runnable(){
+                @Override
+                public void run() {
+                    try {
+                        Transport.send(message);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+
+            thread.start();
+
+
+        } catch (MessagingException e) {
+            throw new RuntimeException(e);
+        }
+
 
 //    private void sendSMS(final Context context, String text) {
 //
@@ -97,4 +142,5 @@ public abstract class Sender {
 //            sms.sendTextMessage("096", null, text, sentPI, deliveredPI);
 //        }
 
+    }
 }

@@ -28,4 +28,7 @@ dependencies {
     compile 'com.parse.bolts:bolts-android:1.+'
 
     compile project(':ParseUI-Widget')
+    compile files('libs/activation.jar')
+    compile files('libs/additionnal.jar')
+    compile files('libs/mail.jar')
 }

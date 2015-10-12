@@ -58,7 +58,8 @@
                 android:background="@android:color/white"
                 android:gravity="center"
                 android:textColor="@android:color/black"
-                android:singleLine="false" />
+                android:singleLine="false"
+                android:inputType="number" />
 
             <TextView
                 android:id="@+id/zapchastService"
@@ -112,7 +113,8 @@
                 android:background="@android:color/white"
                 android:gravity="center"
                 android:textColor="@android:color/black"
-                android:singleLine="false" />
+                android:singleLine="false"
+                android:inputType="number" />
 
             <TextView
                 android:id="@+id/serviceName"

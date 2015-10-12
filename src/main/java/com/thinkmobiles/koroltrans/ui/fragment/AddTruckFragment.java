@@ -313,6 +313,7 @@ public class AddTruckFragment extends Fragment implements View.OnClickListener {
                 Documents.pinAllInBackground(documentsList, new SaveCallback() {
                     @Override
                     public void done(ParseException e) {
+                        getActivity().setResult(Activity.RESULT_OK);
                         getActivity().finish();
 
                     }

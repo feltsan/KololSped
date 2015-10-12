@@ -23,7 +23,7 @@
             android:layout_weight="1">
 
             <TextView
-                android:id="@+id/reysDate"
+                android:id="@+id/nomer"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_column="0"
@@ -31,7 +31,7 @@
                 android:layout_marginBottom="1px"
                 android:layout_marginRight="1px"
                 android:textSize="14dp"
-                android:text="12.10.15"
+                android:text="номер"
                 android:paddingTop="10dp"
                 android:paddingBottom="10dp"
                 android:layout_marginLeft="0.5px"
@@ -43,7 +43,7 @@
 
 
             <TextView
-                android:id="@+id/startpoint"
+                android:id="@+id/type"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_column="1"
@@ -51,7 +51,7 @@
                 android:layout_marginBottom="1px"
                 android:layout_marginRight="1px"
                 android:textSize="14dp"
-                android:text="Васарошнамень"
+                android:text="тип"
                 android:paddingTop="10dp"
                 android:paddingBottom="10dp"
                 android:layout_weight="1"
@@ -61,7 +61,7 @@
                 android:singleLine="false" />
 
             <TextView
-                android:id="@+id/finishPoint"
+                android:id="@+id/date"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_column="2"
@@ -69,7 +69,7 @@
                 android:layout_marginBottom="1px"
                 android:layout_marginRight="1px"
                 android:textSize="14dp"
-                android:text="Москва"
+                android:text="Дата"
                 android:paddingTop="10dp"
                 android:paddingBottom="10dp"
                 android:layout_weight="1"
@@ -78,63 +78,7 @@
                 android:textColor="@android:color/black"
                 android:singleLine="false" />
 
-            <TextView
-                android:id="@+id/client"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_column="3"
-                android:layout_gravity="center"
-                android:layout_marginBottom="1px"
-                android:layout_marginRight="1px"
-                android:textSize="14dp"
-                android:text="Бейла"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp"
-                android:layout_weight="1"
-                android:background="@android:color/white"
-                android:gravity="center"
-                android:textColor="@android:color/black"
-                android:singleLine="false" />
 
-            <TextView
-                android:id="@+id/priceSpedition"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_column="4"
-                android:layout_gravity="center"
-                android:layout_marginBottom="1px"
-                android:layout_marginRight="1px"
-                android:textSize="14dp"
-                android:text="2700"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp"
-                android:layout_weight="1"
-                android:background="@android:color/white"
-                android:gravity="center"
-                android:textColor="@android:color/black"
-                android:singleLine="false"
-                android:inputType="number" />
-
-            <RelativeLayout
-
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_column="5"
-                android:layout_gravity="center"
-                android:layout_marginBottom="1px"
-                android:layout_marginRight="1px"
-
-
-                android:layout_weight="1"
-                android:background="@android:color/white"
-                android:gravity="center"
-              >
-
-                <CheckBox
-                    android:id="@+id/confirmReys"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-            </RelativeLayout>
 
 
         </TableRow>

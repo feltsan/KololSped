@@ -22,6 +22,7 @@ import com.thinkmobiles.koroltrans.App;
 import com.thinkmobiles.koroltrans.R;
 import com.thinkmobiles.koroltrans.adapters.TruckAdapter;
 import com.thinkmobiles.koroltrans.model.Truck;
+import com.thinkmobiles.koroltrans.until.Sender;
 
 import java.util.ArrayList;
 import java.util.List;
