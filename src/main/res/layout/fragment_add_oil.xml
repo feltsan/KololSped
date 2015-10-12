@@ -36,7 +36,7 @@
                 android:layout_marginLeft="0.5px"
                 android:layout_marginRight="0.5px"
                 android:layout_marginTop="1px"
-                android:layout_weight="1"
+                android:layout_weight="3"
                 android:background="@android:color/white"
                 android:gravity="center"
                 android:textColor="@android:color/black">
@@ -58,7 +58,7 @@
                 android:layout_marginBottom="1px"
                 android:layout_marginRight="1px"
                 android:layout_marginTop="1px"
-                android:layout_weight="1"
+                android:layout_weight="3"
                 android:background="@android:color/white"
                 android:gravity="center"
                 android:text="Сертиф."
@@ -80,7 +80,7 @@
                 android:layout_marginBottom="1px"
                 android:layout_marginRight="1px"
                 android:layout_marginTop="1px"
-                android:layout_weight="1"
+                android:layout_weight="3"
                 android:background="@android:color/white"
                 android:gravity="center"
                 android:textColor="@android:color/black">
@@ -107,9 +107,9 @@
                 android:textColor="@android:color/black">
 
                 <TextView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_margin="5dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_margin="2dp"
                     android:background="@drawable/oil_filter" />
             </RelativeLayout>
 
@@ -127,9 +127,9 @@
                 android:textColor="@android:color/black">
 
                 <TextView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_margin="5dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_margin="2dp"
                     android:background="@drawable/air_filter" />
             </RelativeLayout>
 
@@ -148,9 +148,9 @@
                 android:textColor="@android:color/black">
 
                 <TextView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_margin="5dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_margin="2dp"
                     android:background="@drawable/fuel_filter"></TextView>
             </RelativeLayout>
 
@@ -169,9 +169,9 @@
                 android:textColor="@android:color/black">
 
                 <TextView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_margin="5dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_margin="2dp"
                     android:background="@drawable/glago_del"></TextView>
             </RelativeLayout>
 
@@ -183,7 +183,7 @@
                 android:layout_marginBottom="1px"
                 android:layout_marginRight="1px"
                 android:layout_marginTop="1px"
-                android:layout_weight="1"
+                android:layout_weight="3"
 
                 android:background="@android:color/white"
                 android:gravity="center"
@@ -204,7 +204,7 @@
                 android:layout_marginBottom="1px"
                 android:layout_marginRight="1px"
                 android:layout_marginTop="1px"
-                android:layout_weight="1"
+                android:layout_weight="3"
 
                 android:background="@android:color/white"
                 android:gravity="center"
@@ -233,7 +233,7 @@
                 android:layout_marginBottom="1px"
                 android:layout_marginLeft="0.5px"
                 android:layout_marginRight="1px"
-                android:layout_weight="1"
+                android:layout_weight="3"
                 android:background="@android:color/white"
                 android:gravity="center"
                 android:paddingBottom="10dp"
@@ -251,7 +251,7 @@
                 android:layout_gravity="center"
                 android:layout_marginBottom="1px"
                 android:layout_marginRight="1px"
-                android:layout_weight="1"
+                android:layout_weight="3"
                 android:background="@android:color/white"
                 android:gravity="center"
                 android:hint="Пробіг"
@@ -270,7 +270,7 @@
                 android:layout_gravity="center"
                 android:layout_marginBottom="1px"
                 android:layout_marginRight="1px"
-                android:layout_weight="1"
+                android:layout_weight="3"
                 android:background="@android:color/white"
                 android:gravity="center"
                 android:hint="Марка"
@@ -280,8 +280,8 @@
                 android:textColorHint="@android:color/darker_gray"
                 android:textSize="14dp" />
 
-            <EditText
-                android:id="@+id/oilFilter"
+            <RelativeLayout
+
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_column="3"
@@ -291,15 +291,16 @@
                 android:layout_weight="1"
                 android:background="@android:color/white"
                 android:gravity="center"
-                android:hint="Мас.філ"
-                android:paddingBottom="10dp"
-                android:paddingTop="10dp"
-                android:textColor="@android:color/black"
-                android:textColorHint="@android:color/darker_gray"
-                android:textSize="14dp" />
+                >
 
-            <EditText
-                android:id="@+id/airFilter"
+                <CheckBox
+                    android:id="@+id/oilFilterCB"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </RelativeLayout>
+
+            <RelativeLayout
+
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_column="4"
@@ -309,15 +310,16 @@
                 android:layout_weight="1"
                 android:background="@android:color/white"
                 android:gravity="center"
-                android:hint="Воз.філ"
-                android:paddingBottom="10dp"
-                android:paddingTop="10dp"
-                android:textColor="@android:color/black"
-                android:textColorHint="@android:color/darker_gray"
-                android:textSize="14dp" />
+                >
 
-            <EditText
-                android:id="@+id/fuelfilter"
+                <CheckBox
+                    android:id="@+id/airFilterCB"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </RelativeLayout>
+
+            <RelativeLayout
+
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_column="5"
@@ -327,15 +329,16 @@
                 android:layout_weight="1"
                 android:background="@android:color/white"
                 android:gravity="center"
-                android:hint="Топ.філ"
-                android:paddingBottom="10dp"
-                android:paddingTop="10dp"
-                android:textColor="@android:color/black"
-                android:textColorHint="@android:color/darker_gray"
-                android:textSize="14dp" />
+                >
 
-            <EditText
-                android:id="@+id/glagoDel"
+                <CheckBox
+                    android:id="@+id/fuelFilterCB"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </RelativeLayout>
+
+            <RelativeLayout
+
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_column="6"
@@ -345,12 +348,13 @@
                 android:layout_weight="1"
                 android:background="@android:color/white"
                 android:gravity="center"
-                android:hint="Глаг.дел"
-                android:paddingBottom="10dp"
-                android:paddingTop="10dp"
-                android:textColor="@android:color/black"
-                android:textColorHint="@android:color/darker_gray"
-                android:textSize="14dp" />
+                >
+
+                <CheckBox
+                    android:id="@+id/glagodelCB"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </RelativeLayout>
 
             <EditText
                 android:id="@+id/priceOil"
@@ -360,7 +364,7 @@
                 android:layout_gravity="center"
                 android:layout_marginBottom="1px"
                 android:layout_marginRight="1px"
-                android:layout_weight="1"
+                android:layout_weight="3"
                 android:background="@android:color/white"
                 android:gravity="center"
                 android:hint="Ціна"
@@ -378,7 +382,7 @@
                 android:layout_gravity="center"
                 android:layout_marginBottom="1px"
                 android:layout_marginRight="1px"
-                android:layout_weight="1"
+                android:layout_weight="3"
                 android:background="@android:color/white"
                 android:gravity="center"
                 android:hint="Сервіс"

@@ -45,10 +45,10 @@ public class OilAdapter extends ParseQueryAdapter<Oil> {
             holder.date = (TextView) view.findViewById(R.id.dateOil);
             holder.distance = (TextView) view.findViewById(R.id.kmOil);
             holder.brend = (TextView) view.findViewById(R.id.oilBrend);
-            holder.oilF = (TextView) view.findViewById(R.id.oilFilter);
-            holder.airF = (TextView) view.findViewById(R.id.airFilter);
-            holder.fuelF = (TextView) view.findViewById(R.id.fuelfilter);
-            holder.glagodel = (TextView) view.findViewById(R.id.glagoDel);
+            holder.oilF = (CheckBox) view.findViewById(R.id.oilFilterCB);
+            holder.airF = (CheckBox) view.findViewById(R.id.airFilterCB);
+            holder.fuelF = (CheckBox) view.findViewById(R.id.fuelFilterCB);
+            holder.glagodel = (CheckBox) view.findViewById(R.id.glagodelCB);
             holder.price = (TextView) view.findViewById(R.id.priceOil);
             holder.service = (TextView) view.findViewById(R.id.serviceOil);
 
@@ -59,10 +59,10 @@ public class OilAdapter extends ParseQueryAdapter<Oil> {
         TextView date = holder.date;
         TextView distance = holder.distance;
         TextView brend = holder.brend;
-        TextView oilF = holder.oilF;
-        TextView airF = holder.airF;
-        TextView fuelF = holder.fuelF;
-        TextView glagodel = holder.glagodel;
+        CheckBox oilF = holder.oilF;
+        CheckBox airF = holder.airF;
+        CheckBox fuelF = holder.fuelF;
+        CheckBox glagodel = holder.glagodel;
         TextView price = holder.price;
         TextView service = holder.service;
         RelativeLayout layout = holder.layout;
@@ -70,10 +70,10 @@ public class OilAdapter extends ParseQueryAdapter<Oil> {
         date.setText(oil.getDate());
         distance.setText(oil.getDistance());
         brend.setText(oil.getBrend());
-        oilF.setText(oil.getOilFiter());
-        airF.setText(oil.getAirFilter());
-        fuelF.setText(oil.getFuelFilter());
-        glagodel.setText(oil.getGlagoDel());
+        oilF.setChecked(oil.getOilFiter());
+        airF.setChecked(oil.getAirFilter());
+        fuelF.setChecked(oil.getFuelFilter());
+        glagodel.setChecked(oil.getGlagoDel());
         price.setText(oil.getPrice());
         service.setText(oil.getService());
 
@@ -101,10 +101,10 @@ public class OilAdapter extends ParseQueryAdapter<Oil> {
         TextView date;
         TextView distance;
         TextView brend;
-        TextView oilF;
-        TextView airF;
-        TextView fuelF;
-        TextView glagodel;
+        CheckBox oilF;
+        CheckBox airF;
+        CheckBox fuelF;
+        CheckBox glagodel;
         TextView price;
         TextView service;
     }

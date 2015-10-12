@@ -32,7 +32,7 @@
                 android:layout_marginLeft="0.5px"
                 android:layout_marginRight="0.5px"
                 android:layout_marginTop="1px"
-                android:layout_weight="1"
+                android:layout_weight="3"
                 android:background="@android:color/white"
                 android:gravity="center"
                 android:textColor="@android:color/black">
@@ -54,7 +54,7 @@
                 android:layout_marginBottom="1px"
                 android:layout_marginRight="1px"
                 android:layout_marginTop="1px"
-                android:layout_weight="1"
+                android:layout_weight="3"
                 android:background="@android:color/white"
                 android:gravity="center"
                 android:text="Сертиф."
@@ -75,7 +75,7 @@
                 android:layout_marginBottom="1px"
                 android:layout_marginRight="1px"
                 android:layout_marginTop="1px"
-                android:layout_weight="1"
+                android:layout_weight="3"
                 android:background="@android:color/white"
                 android:gravity="center"
                 android:textColor="@android:color/black">
@@ -102,9 +102,9 @@
                 android:textColor="@android:color/black">
 
                 <TextView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_margin="5dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_margin="2dp"
                     android:background="@drawable/oil_filter" />
             </RelativeLayout>
 
@@ -122,9 +122,9 @@
                 android:textColor="@android:color/black">
 
                 <TextView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_margin="5dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_margin="2dp"
                     android:background="@drawable/air_filter" />
             </RelativeLayout>
 
@@ -143,9 +143,9 @@
                 android:textColor="@android:color/black">
 
                 <TextView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_margin="5dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_margin="2dp"
                     android:background="@drawable/fuel_filter"></TextView>
             </RelativeLayout>
             <RelativeLayout
@@ -163,9 +163,9 @@
                 android:textColor="@android:color/black">
 
                 <TextView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_margin="5dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_margin="2dp"
                     android:background="@drawable/glago_del"></TextView>
             </RelativeLayout>
 
@@ -177,7 +177,7 @@
                 android:layout_marginBottom="1px"
                 android:layout_marginRight="1px"
                 android:layout_marginTop="1px"
-                android:layout_weight="1"
+                android:layout_weight="3"
 
                 android:background="@android:color/white"
                 android:gravity="center"
@@ -198,7 +198,7 @@
                 android:layout_marginBottom="1px"
                 android:layout_marginRight="1px"
                 android:layout_marginTop="1px"
-                android:layout_weight="1"
+                android:layout_weight="3"
 
                 android:background="@android:color/white"
                 android:gravity="center"

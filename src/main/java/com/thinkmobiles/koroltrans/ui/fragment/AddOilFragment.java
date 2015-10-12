@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -27,7 +28,8 @@ public class AddOilFragment extends Fragment implements View.OnClickListener {
 
     private View view;
     private TextView date;
-    private EditText distance, brend, oilFilter, airFilter, fuelFilter, glagoDel, price, service;
+    private EditText distance, brend,  price, service;
+    private CheckBox oilFilter, airFilter, fuelFilter, glagoDel;
     private Button save, delete;
     private AddActivity addActivity;
     private Oil oil = null;
@@ -65,10 +67,10 @@ public class AddOilFragment extends Fragment implements View.OnClickListener {
     public void findUI(View view) {
         date = (TextView) view.findViewById(R.id.dateOil);
         distance = (EditText) view.findViewById(R.id.kmOil);
-        oilFilter = (EditText) view.findViewById(R.id.oilFilter);
-        airFilter = (EditText) view.findViewById(R.id.airFilter);
-        fuelFilter = (EditText) view.findViewById(R.id.fuelfilter);
-        glagoDel = (EditText) view.findViewById(R.id.glagoDel);
+        oilFilter = (CheckBox) view.findViewById(R.id.oilFilterCB);
+        airFilter = (CheckBox) view.findViewById(R.id.airFilterCB);
+        fuelFilter = (CheckBox) view.findViewById(R.id.fuelFilterCB);
+        glagoDel = (CheckBox) view.findViewById(R.id.glagodelCB);
         price = (EditText) view.findViewById(R.id.priceOil);
         brend = (EditText) view.findViewById(R.id.oilBrend);
         service = (EditText) view.findViewById(R.id.serviceOil);
@@ -114,11 +116,11 @@ public class AddOilFragment extends Fragment implements View.OnClickListener {
         oil.setDate(date.getText().toString());
         oil.setDistance(distance.getText().toString());
         oil.setBrend(brend.getText().toString());
-        oil.setOilFiter(oilFilter.getText().toString());
-        oil.setAirFilter(airFilter.getText().toString());
-        oil.setFuelFilter(fuelFilter.getText().toString());
+        oil.setOilFiter(oilFilter.isChecked());
+        oil.setAirFilter(airFilter.isChecked());
+        oil.setFuelFilter(fuelFilter.isChecked());
         oil.setPrice(price.getText().toString());
-        oil.setGlagoDel(glagoDel.getText().toString());
+        oil.setGlagoDel(glagoDel.isChecked());
         oil.setService(service.getText().toString());
         oil.saveEventually();
         oil.pinInBackground(new SaveCallback() {
@@ -133,11 +135,11 @@ public class AddOilFragment extends Fragment implements View.OnClickListener {
         date.setText(oil.getDate());
         distance.setText(oil.getDistance());
         brend.setText(oil.getBrend());
-        oilFilter.setText(oil.getOilFiter());
-        airFilter.setText(oil.getAirFilter());
-        fuelFilter.setText(oil.getFuelFilter());
+        oilFilter.setChecked(oil.getOilFiter());
+        airFilter.setChecked(oil.getAirFilter());
+        fuelFilter.setChecked(oil.getFuelFilter());
         price.setText(oil.getPrice());
-        glagoDel.setText(oil.getGlagoDel());
+        glagoDel.setChecked(oil.getGlagoDel());
         service.setText(oil.getService());
     }
 

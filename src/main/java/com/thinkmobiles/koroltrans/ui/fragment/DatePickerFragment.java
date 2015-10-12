@@ -43,7 +43,7 @@ public class DatePickerFragment extends DialogFragment
         Calendar c = Calendar.getInstance();
         c.set(year, month, day);
 
-        SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yy");
+        SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
 
         String formattedDate = sdf.format(c.getTime());
         ((TextView) this.view).setTextColor(getActivity().getResources().getColor(android.R.color.black));

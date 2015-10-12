@@ -35,7 +35,7 @@
                 android:paddingTop="10dp"
                 android:paddingBottom="10dp"
                 android:layout_marginLeft="0.5px"
-                android:layout_weight="1"
+                android:layout_weight="3"
                 android:background="@android:color/white"
                 android:gravity="center"
                 android:textColor="@android:color/black"
@@ -55,7 +55,7 @@
                 android:text="Васарошнамень"
                 android:paddingTop="10dp"
                 android:paddingBottom="10dp"
-                android:layout_weight="1"
+                android:layout_weight="3"
                 android:background="@android:color/white"
                 android:gravity="center"
                 android:textColor="@android:color/black"
@@ -74,83 +74,93 @@
                 android:text="Москва"
                 android:paddingTop="10dp"
                 android:paddingBottom="10dp"
-                android:layout_weight="1"
+                android:layout_weight="3"
                 android:background="@android:color/white"
                 android:gravity="center"
                 android:textColor="@android:color/black"
                 android:singleLine="false" />
 
-            <TextView
-                android:id="@+id/oilFilter"
+            <RelativeLayout
+
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_column="3"
                 android:layout_gravity="center"
                 android:layout_marginBottom="1px"
                 android:layout_marginRight="1px"
-                android:textSize="14dp"
-                android:text="Москва"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp"
                 android:layout_weight="1"
                 android:background="@android:color/white"
                 android:gravity="center"
-                android:textColor="@android:color/black"
-                android:singleLine="false" />
+                >
 
-            <TextView
-                android:id="@+id/airFilter"
+                <CheckBox
+                    android:layout_centerHorizontal="true"
+                    android:id="@+id/oilFilterCB"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:clickable="false"/>
+            </RelativeLayout>
+
+
+            <RelativeLayout
+
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_column="4"
                 android:layout_gravity="center"
                 android:layout_marginBottom="1px"
                 android:layout_marginRight="1px"
-                android:textSize="14dp"
-                android:text="Бейла"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp"
                 android:layout_weight="1"
                 android:background="@android:color/white"
                 android:gravity="center"
-                android:textColor="@android:color/black"
-                android:singleLine="false" />
+                >
 
-            <TextView
-                android:id="@+id/fuelfilter"
+                <CheckBox
+                    android:id="@+id/airFilterCB"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:clickable="false"/>
+            </RelativeLayout>
+
+            <RelativeLayout
+
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_column="5"
                 android:layout_gravity="center"
                 android:layout_marginBottom="1px"
                 android:layout_marginRight="1px"
-                android:textSize="14dp"
-                android:text="2700"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp"
                 android:layout_weight="1"
                 android:background="@android:color/white"
                 android:gravity="center"
-                android:textColor="@android:color/black"
-                android:singleLine="false" />
+                >
 
-            <TextView
-                android:id="@+id/glagoDel"
+                <CheckBox
+                    android:id="@+id/fuelFilterCB"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:clickable="false"/>
+            </RelativeLayout>
+
+            <RelativeLayout
+
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_column="6"
                 android:layout_gravity="center"
                 android:layout_marginBottom="1px"
                 android:layout_marginRight="1px"
-                android:textSize="14dp"
-                android:text="2700"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp"
                 android:layout_weight="1"
                 android:background="@android:color/white"
                 android:gravity="center"
-                android:textColor="@android:color/black"
-                android:singleLine="false" />
+                >
+
+                <CheckBox
+                    android:id="@+id/glagodelCB"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:clickable="false"/>
+            </RelativeLayout>
 
             <TextView
                 android:id="@+id/priceOil"
@@ -164,7 +174,7 @@
                 android:text="2700"
                 android:paddingTop="10dp"
                 android:paddingBottom="10dp"
-                android:layout_weight="1"
+                android:layout_weight="3"
                 android:background="@android:color/white"
                 android:gravity="center"
                 android:textColor="@android:color/black"
@@ -182,7 +192,7 @@
                 android:text="2700"
                 android:paddingTop="10dp"
                 android:paddingBottom="10dp"
-                android:layout_weight="1"
+                android:layout_weight="3"
                 android:background="@android:color/white"
                 android:gravity="center"
                 android:textColor="@android:color/black"

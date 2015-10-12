@@ -35,19 +35,19 @@ public class Oil extends ParseObject implements Serializable {
         put("brend", brend);
     }
 
-    public void setOilFiter(String oilFilter){
+    public void setOilFiter(boolean oilFilter){
         put("oil_filter", oilFilter);
     }
 
-    public void setAirFilter(String airFilter){
+    public void setAirFilter(boolean airFilter){
         put("air_filter", airFilter);
     }
 
-    public void setFuelFilter(String fuelFilter){
+    public void setFuelFilter(boolean fuelFilter){
         put("fuel_filter", fuelFilter);
     }
 
-    public void setGlagoDel(String glagodel){
+    public void setGlagoDel(boolean glagodel){
         put("glagodel", glagodel);
     }
 
@@ -97,20 +97,20 @@ public class Oil extends ParseObject implements Serializable {
         return getString("brend");
     }
 
-    public String getOilFiter(){
-        return getString("oil_filter");
+    public boolean getOilFiter(){
+        return getBoolean("oil_filter");
     }
 
-    public String getAirFilter(){
-        return getString("air_filter");
+    public boolean getAirFilter(){
+        return getBoolean("air_filter");
     }
 
-    public String getFuelFilter(){
-        return getString("fuel_filter");
+    public boolean getFuelFilter(){
+        return getBoolean("fuel_filter");
     }
 
-    public String getGlagoDel(){
-        return getString("glagodel");
+    public boolean getGlagoDel(){
+        return getBoolean("glagodel");
     }
 
     public String getPrice(){
