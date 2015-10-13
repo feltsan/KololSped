@@ -25,7 +25,7 @@ public class Documents extends ParseObject {
         put("type", type);
     }
 
-    public void setEndDate(String end_date){
+    public void setEndDate(long end_date){
         put("end_date", end_date);
     }
 
@@ -62,8 +62,8 @@ public class Documents extends ParseObject {
         return getInt("type");
     }
 
-    public String getEndDate(){
-        return getString("end_date");
+    public long getEndDate(){
+        return getLong("end_date");
     }
 
     public String getPrice(){

@@ -52,18 +52,7 @@ public class AllTruckActivity extends AppCompatActivity implements View.OnClickL
     @Override
     protected void onResume() {
         super.onResume();
-//            truckAdapter.loadObjects();
-//        ParseQuery<Truck> query = ParseQuery.getQuery(Truck.class);
-//        query.fromLocalDatastore();
-//        query.findInBackground(new FindCallback<Truck>() {
-//            public void done(List<Truck> itemList, ParseException e) {
-//                if (e == null) {
-//
-//                } else {
-//                    Log.d("item", "Error: " + e.getMessage());
-//                }
-//            }
-//        });
+            truckAdapter.loadObjects();
     }
 
     public void setAdapter() {
@@ -88,19 +77,6 @@ public class AllTruckActivity extends AppCompatActivity implements View.OnClickL
         fba.setOnClickListener(this);
         gridView.setOnItemClickListener(this);
         gridView.setOnItemLongClickListener(this);
-
-//            @Override
-//            public void onClick(View v) {
-//                TodoItem todoItem =new TodoItem("English");
-//                todoItem.saveEventually();
-//                todoItem.pinInBackground();
-//                getSupportFragmentManager().beginTransaction()
-//                        .replace(R.id.container, new AddTruckFragment())
-//                        .commit();
-//                fba.setVisibility(View.GONE);
-//
-//            }
-//        });
     }
 
 
@@ -126,6 +102,11 @@ public class AllTruckActivity extends AppCompatActivity implements View.OnClickL
         startActivityForResult(i, App.EDIT_TRUCK_CODE);
     }
 
+    private void openAllDocumentsView() {
+        Intent i = new Intent(this, AllDocumentsActivity.class);
+        startActivityForResult(i, App.DETAIL_TRUCK_CODE);
+    }
+
     @Override
     public void onClick(View v) {
         openAddView();
@@ -149,5 +130,29 @@ public class AllTruckActivity extends AppCompatActivity implements View.OnClickL
     public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
         openEditView(truckAdapter.getItem(position));
         return true;
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_settings) {
+        openAllDocumentsView();
+
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }

@@ -26,6 +26,9 @@ import com.thinkmobiles.koroltrans.model.Truck;
 import com.thinkmobiles.koroltrans.ui.activity.AddActivity;
 import com.thinkmobiles.koroltrans.ui.activity.AllTruckActivity;
 
+import com.thinkmobiles.koroltrans.until.DateHelper;
+
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -250,43 +253,43 @@ public class AddTruckFragment extends Fragment implements View.OnClickListener {
         truck.setTrailerNomer(trailerNomer.getText().toString());
 
 
-        documentGCTru.setEndDate(greenCartDateTruck.getText().toString());
+        documentGCTru.setEndDate(DateHelper.convertStringToLong(greenCartDateTruck.getText().toString()));
         documentGCTru.setPrice(greenCartPriceTruck.getText().toString());
         documentGCTru.setTruck(truck);
 
-        documentGCTra.setEndDate(greenCartDateTrailer.getText().toString());
+        documentGCTra.setEndDate(DateHelper.convertStringToLong(greenCartDateTrailer.getText().toString()));
         documentGCTra.setPrice(greenCartPriceTrailer.getText().toString());
         documentGCTra.setTruck(truck);
 
-        documentWSTru.setEndDate(certDateTruck.getText().toString());
+        documentWSTru.setEndDate(DateHelper.convertStringToLong(certDateTruck.getText().toString()));
         documentWSTru.setPrice(certPriceTruck.getText().toString());
         documentWSTru.setTruck(truck);
 
-        documentWSTra.setEndDate(certDateTrailer.getText().toString());
+        documentWSTra.setEndDate(DateHelper.convertStringToLong(certDateTrailer.getText().toString()));
         documentWSTra.setPrice(certPriceTrailer.getText().toString());
         documentWSTra.setTruck(truck);
 
-        documentEPTru.setEndDate(europackDateTruck.getText().toString());
+        documentEPTru.setEndDate(DateHelper.convertStringToLong(europackDateTruck.getText().toString()));
         documentEPTru.setPrice(europackPriceTruck.getText().toString());
         documentEPTru.setTruck(truck);
 
-        documentEPTra.setEndDate(europackDateTrailer.getText().toString());
+        documentEPTra.setEndDate(DateHelper.convertStringToLong(europackDateTrailer.getText().toString()));
         documentEPTra.setPrice(europackPriceTrailer.getText().toString());
         documentEPTra.setTruck(truck);
 
-        documentTACHO.setEndDate(tachoDateTruck.getText().toString());
+        documentTACHO.setEndDate(DateHelper.convertStringToLong(tachoDateTruck.getText().toString()));
         documentTACHO.setPrice(tachoPriceTruck.getText().toString());
         documentTACHO.setTruck(truck);
 
-        documentYSTra.setEndDate(svidDateTrailer.getText().toString());
+        documentYSTra.setEndDate(DateHelper.convertStringToLong(svidDateTrailer.getText().toString()));
         documentYSTra.setPrice(svidPriceTrailer.getText().toString());
         documentYSTra.setTruck(truck);
 
-        documentPOLTru.setEndDate(strachDateTruck.getText().toString());
+        documentPOLTru.setEndDate(DateHelper.convertStringToLong(strachDateTruck.getText().toString()));
         documentPOLTru.setPrice(strachPriceTruck.getText().toString());
         documentPOLTru.setTruck(truck);
 
-        documentPOLTra.setEndDate(strachDateTrailer.getText().toString());
+        documentPOLTra.setEndDate(DateHelper.convertStringToLong(strachDateTrailer.getText().toString()));
         documentPOLTra.setPrice(strachPriceTrailer.getText().toString());
         documentPOLTra.setTruck(truck);
 
@@ -344,34 +347,34 @@ public class AddTruckFragment extends Fragment implements View.OnClickListener {
         nomer.setText(truck.getNomer());
         trailerNomer.setText(truck.getTrailerNomer());
 
-        greenCartDateTruck.setText(documentGCTru.getEndDate());
+        greenCartDateTruck.setText(DateHelper.convertLongToString(documentGCTru.getEndDate()));
         greenCartPriceTruck.setText(documentGCTru.getPrice());
 
-        greenCartDateTrailer.setText(documentGCTra.getEndDate());
+        greenCartDateTrailer.setText(DateHelper.convertLongToString(documentGCTra.getEndDate()));
         greenCartPriceTrailer.setText(documentGCTra.getPrice());
 
-        certDateTruck.setText(documentWSTru.getEndDate());
+        certDateTruck.setText(DateHelper.convertLongToString(documentWSTru.getEndDate()));
         certPriceTruck.setText(documentWSTru.getPrice());
 
-        certDateTrailer.setText(documentWSTra.getEndDate());
+        certDateTrailer.setText(DateHelper.convertLongToString(documentWSTra.getEndDate()));
         certPriceTrailer.setText(documentWSTra.getPrice());
 
-        europackDateTruck.setText(documentEPTru.getEndDate());
+        europackDateTruck.setText(DateHelper.convertLongToString(documentEPTru.getEndDate()));
         europackPriceTruck.setText(documentEPTru.getPrice());
 
-        europackDateTrailer.setText(documentEPTra.getEndDate());
+        europackDateTrailer.setText(DateHelper.convertLongToString(documentEPTra.getEndDate()));
         europackPriceTrailer.setText(documentEPTra.getPrice());
 
-        tachoDateTruck.setText(documentTACHO.getEndDate());
+        tachoDateTruck.setText(DateHelper.convertLongToString(documentTACHO.getEndDate()));
         tachoPriceTruck.setText(documentTACHO.getPrice());
 
-        svidDateTrailer.setText(documentYSTra.getEndDate());
+        svidDateTrailer.setText(DateHelper.convertLongToString(documentYSTra.getEndDate()));
         svidPriceTrailer.setText(documentYSTra.getPrice());
 
-        strachDateTruck.setText(documentPOLTru.getEndDate());
+        strachDateTruck.setText(DateHelper.convertLongToString(documentPOLTru.getEndDate()));
         strachPriceTruck.setText(documentPOLTru.getPrice());
 
-        strachDateTrailer.setText(documentPOLTra.getEndDate());
+        strachDateTrailer.setText(DateHelper.convertLongToString(documentPOLTra.getEndDate()));
         strachPriceTrailer.setText(documentPOLTra.getPrice());
     }
 

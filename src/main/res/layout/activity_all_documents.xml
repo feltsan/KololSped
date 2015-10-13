@@ -32,7 +32,7 @@
             android:layout_weight="1"
             android:background="@android:color/white"
             android:gravity="center"
-            android:text="Закінчується термін дії"
+            android:text="Всі документи"
             android:textColor="@android:color/holo_red_dark"
             android:textSize="24dp"
             android:paddingTop="7dp"
@@ -119,18 +119,7 @@
 
     </ListView>
 
-    <Button
 
-        android:id="@+id/close"
-        app:layout_anchorGravity="bottom|right|end"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_centerHorizontal="true"
-        android:layout_marginRight="@dimen/abc_action_bar_icon_vertical_padding_material"
-        android:text="Закрити"
-        android:layout_alignParentBottom="true"
-        />
 
 
 </RelativeLayout>

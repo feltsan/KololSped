@@ -17,6 +17,7 @@ import com.thinkmobiles.koroltrans.App;
 import com.thinkmobiles.koroltrans.R;
 import com.thinkmobiles.koroltrans.model.Documents;
 import com.thinkmobiles.koroltrans.model.Truck;
+import com.thinkmobiles.koroltrans.until.DateHelper;
 
 import java.util.List;
 
@@ -143,52 +144,52 @@ public class TruckFragment extends Fragment {
                 for (Documents documents : objects) {
                     switch (documents.getType()) {
                         case App.GCTru:
-                            greenCartDateTru = documents.getEndDate();
+                            greenCartDateTru = DateHelper.convertLongToString(documents.getEndDate());
                             greenCartPriceTru = documents.getPrice();
                             break;
 
                         case App.GCTra:
-                            greenCartDateTra = documents.getEndDate();
+                            greenCartDateTra =DateHelper.convertLongToString(documents.getEndDate());
                             greenCartPriceTra = documents.getPrice();
                             break;
 
                         case App.WSTru:
-                            certDateTru = documents.getEndDate();
+                            certDateTru = DateHelper.convertLongToString(documents.getEndDate());
                             certPriceTru = documents.getPrice();
                             break;
 
                         case App.WSTra:
-                            certDateTra = documents.getEndDate();
+                            certDateTra =DateHelper.convertLongToString(documents.getEndDate());
                             certPriceTra = documents.getPrice();
                             break;
 
                         case App.EPTru:
-                            europackDateTru = documents.getEndDate();
+                            europackDateTru = DateHelper.convertLongToString(documents.getEndDate());
                             europackPriceTru = documents.getPrice();
                             break;
 
                         case App.EPTra:
-                            europackDateTra = documents.getEndDate();
+                            europackDateTra = DateHelper.convertLongToString(documents.getEndDate());
                             europackPriceTra = documents.getPrice();
                             break;
 
                         case App.TACHO:
-                            tachoDateTru = documents.getEndDate();
+                            tachoDateTru = DateHelper.convertLongToString(documents.getEndDate());
                             tachoPriceTru = documents.getPrice();
                             break;
 
                         case App.YSTra:
-                            svidDateTra = documents.getEndDate();
+                            svidDateTra = DateHelper.convertLongToString(documents.getEndDate());
                             svidPriceTra = documents.getPrice();
                             break;
 
                         case App.POLTru:
-                            starchDateTru = documents.getEndDate();
+                            starchDateTru = DateHelper.convertLongToString(documents.getEndDate());
                             starchPriceTru = documents.getPrice();
                             break;
 
                         case App.POLTra:
-                            starchDateTra = documents.getEndDate();
+                            starchDateTra =DateHelper.convertLongToString(documents.getEndDate());
                             starchPriceTra = documents.getPrice();
                             break;
 

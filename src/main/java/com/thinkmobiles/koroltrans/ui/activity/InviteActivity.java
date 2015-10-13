@@ -29,7 +29,7 @@ public class InviteActivity extends AppCompatActivity {
         invites.add(new Invite("AO7555BH","Зелена карта", "18.10.15"));
         invites.add(new Invite("AO1441AX","Масло", "-"));
 
-        listView = (ListView) findViewById(R.id.inviteList);
+        listView = (ListView) findViewById(R.id.documentsList);
         listView.setAdapter(new InviteAdapter(this, invites));
 
         button = (Button) findViewById(R.id.close);

@@ -40,6 +40,15 @@
         <activity android:name=".ui.activity.DetailActivity"
             android:theme="@style/Theme.AppCompat"/>
 
+        <activity android:name=".ui.activity.AllDocumentsActivity"
+            android:theme="@style/Theme.AppCompat">
+
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ui.activity.AllTruckActivity"/>
+        </activity>
+
+
         <receiver
             android:name=".until.BootReceiver"
             android:exported="true">

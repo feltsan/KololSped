@@ -46,6 +46,10 @@ public class Servis extends ParseObject implements Serializable {
         put("service", service);
     }
 
+    public void setShop(String shop){
+        put("shop", shop);
+    }
+
     public void setTruck(Truck truck){
         put("truck", truck);
     }
@@ -77,6 +81,10 @@ public class Servis extends ParseObject implements Serializable {
 
     public String getBrend(){
         return getString("brend");
+    }
+
+    public String getShop(){
+        return getString("shop");
     }
 
 

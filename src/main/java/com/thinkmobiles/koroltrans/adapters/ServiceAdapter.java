@@ -45,6 +45,7 @@ public class ServiceAdapter extends ParseQueryAdapter<Servis> {
             holder.price = (TextView) view.findViewById(R.id.priceBrend);
             holder.service = (TextView) view.findViewById(R.id.serviceName);
             holder.layout = (RelativeLayout) view.findViewById(R.id.layout);
+            holder.shop = (TextView) view.findViewById(R.id.shopService);
 
             view.setTag(holder);
         } else {
@@ -56,6 +57,7 @@ public class ServiceAdapter extends ParseQueryAdapter<Servis> {
         TextView zapchast = holder.zapchast;
         TextView price = holder.price;
         TextView servis = holder.service;
+        TextView shop = holder.shop;
         RelativeLayout layout = holder.layout;
 
         date.setText(service.getDate());
@@ -63,6 +65,7 @@ public class ServiceAdapter extends ParseQueryAdapter<Servis> {
         brend.setText(service.getBrend());
         zapchast.setText(service.getZapchast());
         price.setText(service.getPrice());
+        shop.setText(service.getShop());
         servis.setText(service.getService());
 
         layout.setOnLongClickListener(new View.OnLongClickListener() {
@@ -92,5 +95,6 @@ public class ServiceAdapter extends ParseQueryAdapter<Servis> {
         TextView brend;
         TextView price;
         TextView service;
+        TextView shop;
     }
 }
