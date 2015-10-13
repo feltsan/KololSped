@@ -2,6 +2,7 @@ package com.thinkmobiles.koroltrans.adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -54,57 +55,77 @@ public class AllDocumentsAdapter extends ParseQueryAdapter<Documents> {
         RelativeLayout layout = holder.layout;
 
         date.setText(DateHelper.convertLongToString(documents.getEndDate()));
-        nomer.setText(documents.getTruck().getNomer());
+
 
         switch (documents.getType()) {
             case App.GCTru:
                 layout.setBackgroundColor(context.getResources().getColor(android.R.color.holo_green_dark));
+                type.setBackgroundColor(context.getResources().getColor(android.R.color.holo_green_dark));
+                nomer.setText(documents.getTruck().getNomer());
                 type.setText("Карта");
                 break;
 
             case App.GCTra:
                 layout.setBackgroundColor(context.getResources().getColor(android.R.color.holo_green_dark));
+                type.setBackgroundColor(context.getResources().getColor(android.R.color.holo_green_dark));
                 type.setText("Карта");
+                nomer.setText(documents.getTruck().getTrailerNomer());
                 break;
 
             case App.WSTru:
                 layout.setBackgroundColor(context.getResources().getColor(android.R.color.white));
+                type.setBackgroundColor(context.getResources().getColor(android.R.color.white));
                 type.setText("Сертиф.");
+                nomer.setText(documents.getTruck().getNomer());
                 break;
 
             case App.WSTra:
                 layout.setBackgroundColor(context.getResources().getColor(android.R.color.white));
+                type.setBackgroundColor(context.getResources().getColor(android.R.color.white));
                 type.setText("Сертиф.");
+                nomer.setText(documents.getTruck().getTrailerNomer());
                 break;
 
             case App.EPTru:
                 layout.setBackgroundColor(context.getResources().getColor(android.R.color.white));
-                type.setBackgroundDrawable(context.getResources().getDrawable(R.drawable.euro));
+                type.setBackgroundDrawable(context.getResources().getDrawable(R.drawable.eu));
+                type.setText("");
+                nomer.setText(documents.getTruck().getNomer());
                 break;
 
             case App.EPTra:
                 layout.setBackgroundColor(context.getResources().getColor(android.R.color.white));
-                type.setBackgroundDrawable(context.getResources().getDrawable(R.drawable.euro));
+                type.setBackgroundDrawable(context.getResources().getDrawable(R.drawable.eu));
+                type.setText("");
+                nomer.setText(documents.getTruck().getTrailerNomer());
                 break;
 
             case App.TACHO:
                 layout.setBackgroundColor(context.getResources().getColor(android.R.color.white));
-                type.setBackgroundDrawable(context.getResources().getDrawable(R.drawable.tacho));
+                type.setBackgroundDrawable(context.getResources().getDrawable(R.drawable.ta));
+                type.setText("");
+                nomer.setText(documents.getTruck().getNomer());
                 break;
 
             case App.YSTra:
-                layout.setBackgroundColor(context.getResources().getColor(android.R.color.holo_orange_light));
+                layout.setBackgroundColor(Color.parseColor("#fff100"));
+                type.setBackgroundColor(Color.parseColor("#fff100"));
                 type.setText("Свід.");
+                nomer.setText(documents.getTruck().getTrailerNomer());
                 break;
 
             case App.POLTru:
                 layout.setBackgroundColor(context.getResources().getColor(android.R.color.white));
-                type.setBackgroundDrawable(context.getResources().getDrawable(R.drawable.strach));
+                type.setBackgroundDrawable(context.getResources().getDrawable(R.drawable.stra));
+                type.setText("");
+                nomer.setText(documents.getTruck().getNomer());
                 break;
 
             case App.POLTra:
                 layout.setBackgroundColor(context.getResources().getColor(android.R.color.white));
-                type.setBackgroundDrawable(context.getResources().getDrawable(R.drawable.strach));
+                type.setBackgroundDrawable(context.getResources().getDrawable(R.drawable.stra));
+                type.setText("");
+                nomer.setText(documents.getTruck().getTrailerNomer());
                 break;
         }
 

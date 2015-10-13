@@ -41,12 +41,9 @@
             android:theme="@style/Theme.AppCompat"/>
 
         <activity android:name=".ui.activity.AllDocumentsActivity"
-            android:theme="@style/Theme.AppCompat">
+            android:theme="@style/Theme.AppCompat"
+            android:parentActivityName=".ui.activity.AllTruckActivity"/>
 
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ui.activity.AllTruckActivity"/>
-        </activity>
 
 
         <receiver
