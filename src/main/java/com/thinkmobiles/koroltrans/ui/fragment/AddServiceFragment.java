@@ -27,7 +27,7 @@ public class AddServiceFragment extends Fragment implements View.OnClickListener
 
     private View view;
     private TextView date;
-    private EditText distance, zapchast, brend, price, service;
+    private EditText distance, zapchast, brend, price, service, shop;
     private Button save, delete;
     private AddActivity addActivity;
     private Servis servis = null;
@@ -72,7 +72,7 @@ public class AddServiceFragment extends Fragment implements View.OnClickListener
         service = (EditText) view.findViewById(R.id.serviceName);
         save = (Button) view.findViewById(R.id.save);
         delete = (Button) view.findViewById(R.id.delete);
-
+        shop = (EditText) view.findViewById(R.id.shopService);
     }
 
     public void setListener() {
@@ -116,6 +116,7 @@ public class AddServiceFragment extends Fragment implements View.OnClickListener
         servis.setBrend(brend.getText().toString());
         servis.setZapchast(zapchast.getText().toString());
         servis.setPrice(price.getText().toString());
+        servis.setShop(shop.getText().toString());
         servis.setService(service.getText().toString());
         servis.saveEventually();
         servis.pinInBackground(new SaveCallback() {
@@ -132,6 +133,7 @@ public class AddServiceFragment extends Fragment implements View.OnClickListener
         brend.setText(servis.getBrend());
         zapchast.setText(servis.getZapchast());
         price.setText(servis.getPrice());
+        shop.setText(servis.getShop());
         service.setText(servis.getService());
     }
 

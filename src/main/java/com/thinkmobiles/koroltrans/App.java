@@ -1,6 +1,7 @@
 package com.thinkmobiles.koroltrans;
 
 import android.app.Application;
+import android.content.SharedPreferences;
 
 
 import com.parse.Parse;
@@ -39,8 +40,13 @@ public class App extends Application{
     public static final int POLTru =9;
     public static final int POLTra =10;
 
+
     public static final String TRUCK_GROUP_NAME = "ALL_TRUCK";
     public static final String TRUCK_ID = "TRUCK_ID";
+    public static final String SERVICE_ID = "SERVICE_ID";
+    public static final String RUN_ID = "RUN_ID";
+    public static final String SER_ID = "RUN_ID";
+
 
     @Override
     public void onCreate() {
@@ -56,4 +62,6 @@ public class App extends Application{
         Parse.initialize(this, "MlysikbcKw2P35Bp0FdkCncIzjLRttezJowoqtj0", "cUbHLOLJqcnmtcp2ZBZ0cTBImdrfxBSvORnqnUff");
 
     }
+
+
 }

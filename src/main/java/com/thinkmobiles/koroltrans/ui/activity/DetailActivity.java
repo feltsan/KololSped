@@ -66,12 +66,7 @@ public class DetailActivity extends AppCompatActivity {
         return truck;
     }
 
-    public void testInvite(){
-        Sender.sendEmail("");
-        Sender.sendSMS(this, "+380979330846", "АО7555ВН Зелена карта 18.10.15 " +
-                "АО1441АХ Заміна масла");
-        startActivityForResult(new Intent(this, InviteActivity.class), 55);
-    }
+
 
     public AllReysFragment getMyFragment(){
         return (AllReysFragment)

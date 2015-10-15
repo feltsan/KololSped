@@ -2,6 +2,7 @@ package com.thinkmobiles.koroltrans.ui.activity;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ListView;
 import android.support.v4.app.NavUtils;
@@ -13,6 +14,8 @@ import com.thinkmobiles.koroltrans.adapters.AllDocumentsAdapter;
 import com.thinkmobiles.koroltrans.adapters.TruckAdapter;
 import com.thinkmobiles.koroltrans.model.Documents;
 import com.thinkmobiles.koroltrans.model.Truck;
+import com.thinkmobiles.koroltrans.until.Alarm;
+import com.thinkmobiles.koroltrans.until.ShPrManager;
 
 import java.util.List;
 
@@ -24,6 +27,7 @@ public class AllDocumentsActivity extends AppCompatActivity {
     private ListView listView;
     private ParseQueryAdapter.QueryFactory<Documents> factory;
     private AllDocumentsAdapter documentsAdapter;
+    boolean isRunService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,18 +37,56 @@ public class AllDocumentsActivity extends AppCompatActivity {
         setAdapter();
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+
     }
     private void findUI(){
         listView = (ListView) findViewById(R.id.documentsList);
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        isRunService = ShPrManager.getRunService(this);
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_my, menu);
+        MenuItem item = menu.findItem(R.id.action_remember);
+
+        if (isRunService) {
+            item.setTitle("Вкл.");
+            item.setIcon(R.drawable.switch_active);
+        } else {
+            item.setTitle("Викл.");
+            item.setIcon(R.drawable.switch_inactive);
+        }
+        return true;
+    }
+
+
+        @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+
         switch (item.getItemId()) {
             // Respond to the action bar's Up/Home button
             case android.R.id.home:
                 NavUtils.navigateUpFromSameTask(this);
-                return true;
+                break;
+
+            case R.id.action_remember:
+                isRunService = ShPrManager.getRunService(this);
+                if(isRunService){
+                    //change your view and sort it by Alphabet
+                    item.setIcon(R.drawable.switch_inactive);
+                    item.setTitle("Викл.");
+                    new Alarm().CancelAlarm(this);
+                    ShPrManager.setRunService(this,false);
+                }else{
+                    //change your view and sort it by Date of Birth
+                    item.setIcon(R.drawable.switch_active);
+                    item.setTitle("Вкл.");
+                    new Alarm().SetAlarm(this);
+                    ShPrManager.setRunService(this,true);
+                }
+                break;
         }
         return super.onOptionsItemSelected(item);
     }

@@ -22,6 +22,7 @@ import com.thinkmobiles.koroltrans.App;
 import com.thinkmobiles.koroltrans.R;
 import com.thinkmobiles.koroltrans.adapters.TruckAdapter;
 import com.thinkmobiles.koroltrans.model.Truck;
+import com.thinkmobiles.koroltrans.until.Alarm;
 import com.thinkmobiles.koroltrans.until.Sender;
 
 import java.util.ArrayList;
@@ -32,6 +33,8 @@ public class AllTruckActivity extends AppCompatActivity implements View.OnClickL
     private GridView gridView;
     private ParseQueryAdapter.QueryFactory<Truck> factory;
     private TruckAdapter truckAdapter;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -149,7 +152,6 @@ public class AllTruckActivity extends AppCompatActivity implements View.OnClickL
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
         openAllDocumentsView();
-
             return true;
         }
 

@@ -6,11 +6,19 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.telephony.gsm.SmsManager;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.thinkmobiles.koroltrans.App;
+import com.thinkmobiles.koroltrans.R;
+import com.thinkmobiles.koroltrans.model.Documents;
+import com.thinkmobiles.koroltrans.model.Oil;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 
 import javax.mail.Message;
@@ -27,7 +35,7 @@ import javax.mail.internet.MimeMessage;
 public abstract class Sender {
 
 
-    public static void sendSMS(Context context, String phoneNo, String msg) {
+    public static void sendSMS1(Context context, String phoneNo, String msg) {
         try {
             SmsManager smsManager = SmsManager.getDefault();
             smsManager.sendTextMessage(phoneNo, null, msg, null, null);
@@ -58,12 +66,11 @@ public abstract class Sender {
         try {
             final Message message = new MimeMessage(session);
             message.setFrom(new InternetAddress("program.korol@gmail.com"));
-            message.setRecipients(Message.RecipientType.TO, InternetAddress.parse("ivan-korol.m@mail.ru"));
+            message.setRecipients(Message.RecipientType.TO, InternetAddress.parse("ivan.feltsan@gmail.com"));
             message.setSubject("ЗАКІНЧУЄТЬСЯ ТЕРМІН ДІЇ!");
-            message.setContent("АО7555ВН Зелена карта 18.10.15 " +
-                    " АО1441АХ Заміна масла ", "text/html; charset=utf-8");
+            message.setContent(msg, "text/html; charset=utf-8");
 
-            Thread thread = new Thread(new Runnable(){
+            Thread thread = new Thread(new Runnable() {
                 @Override
                 public void run() {
                     try {
@@ -80,67 +87,83 @@ public abstract class Sender {
         } catch (MessagingException e) {
             throw new RuntimeException(e);
         }
-
-
-//    private void sendSMS(final Context context, String text) {
-//
-//        String SENT = "SENT";
-//        String DELIVERED = "DELIVER";
-//
-//        PendingIntent sentPI = PendingIntent.getBroadcast(context, 0,
-//                new Intent(SENT), 0);
-//
-//        PendingIntent deliveredPI = PendingIntent.getBroadcast(context, 0,
-//                new Intent(DELIVERED), 0);
-//
-//        //---when the SMS has been sent---
-//        context.registerReceiver(new BroadcastReceiver() {
-//            @Override
-//            public void onReceive(Context arg0, Intent arg1) {
-//                switch (getResultCode()) {
-//                    case Activity.RESULT_OK:
-//
-//
-//                        break;
-//                    case SmsManager.RESULT_ERROR_GENERIC_FAILURE:
-//                        Toast.makeText(context, "generic_failure",
-//                                Toast.LENGTH_SHORT).show();
-//
-//                        break;
-//                    case SmsManager.RESULT_ERROR_NO_SERVICE:
-//                        Toast.makeText(context, "no_service",
-//                                Toast.LENGTH_SHORT).show();
-//                        break;
-//                    case SmsManager.RESULT_ERROR_NULL_PDU:
-//                        Toast.makeText(context, "null_pdu",
-//                                Toast.LENGTH_SHORT).show();
-//
-//                        break;
-//                    case SmsManager.RESULT_ERROR_RADIO_OFF:
-//                        Toast.makeText(context, "radio_off",
-//                                Toast.LENGTH_SHORT).show();
-//
-//                        break;
-//                }
-//            }
-//        }, new IntentFilter(SENT));
-//
-//        //---when the SMS has been delivered---
-//        context.registerReceiver(new BroadcastReceiver() {
-//            @Override
-//            public void onReceive(Context arg0, Intent arg1) {
-//                switch (getResultCode()) {
-//                    case Activity.RESULT_OK:
-//                        break;
-//                    case Activity.RESULT_CANCELED:
-//                        break;
-//                }
-//            }
-//        }, new IntentFilter(DELIVERED));
-//
-//            SmsManager sms = SmsManager.getDefault();
-//            sms.sendTextMessage("096", null, text, sentPI, deliveredPI);
-//        }
-
     }
+
+    public static void sendSMS(final Context context, String msg, final List<Documents> documentses, final List<Oil> oils)
+    {
+
+        String SENT = "SMS_SENT";
+        String DELIVERED = "SMS_DELIVERED";
+
+        PendingIntent sentPI = PendingIntent.getBroadcast(context, 0,
+                new Intent(SENT), 0);
+
+        PendingIntent deliveredPI = PendingIntent.getBroadcast(context, 0,
+                new Intent(DELIVERED), 0);
+
+        //---when the SMS has been sent---
+        context.registerReceiver(new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context arg0, Intent arg1) {
+                switch (getResultCode()) {
+                    case Activity.RESULT_OK:
+                        Toast.makeText(context, "SMS sent",
+                                Toast.LENGTH_SHORT).show();
+                        break;
+                    case SmsManager.RESULT_ERROR_GENERIC_FAILURE:
+                        Toast.makeText(context, "Generic failure",
+                                Toast.LENGTH_SHORT).show();
+                        break;
+                    case SmsManager.RESULT_ERROR_NO_SERVICE:
+                        Toast.makeText(context, "No service",
+                                Toast.LENGTH_SHORT).show();
+                        break;
+                    case SmsManager.RESULT_ERROR_NULL_PDU:
+                        Toast.makeText(context, "Null PDU",
+                                Toast.LENGTH_SHORT).show();
+                        break;
+                    case SmsManager.RESULT_ERROR_RADIO_OFF:
+                        Toast.makeText(context, "Radio off",
+                                Toast.LENGTH_SHORT).show();
+                        break;
+                }
+            }
+        }, new IntentFilter(SENT));
+
+        //---when the SMS has been delivered---
+        context.registerReceiver(new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context arg0, Intent arg1) {
+                switch (getResultCode()) {
+                    case Activity.RESULT_OK:
+                       setConfirm(documentses, oils);
+                        Toast.makeText(context, "SMS delivered",
+                                Toast.LENGTH_SHORT).show();
+                        break;
+                    case Activity.RESULT_CANCELED:
+                        Toast.makeText(context, "SMS not delivered",
+                                Toast.LENGTH_SHORT).show();
+                        break;
+                }
+            }
+        }, new IntentFilter(DELIVERED));
+
+        SmsManager sms = SmsManager.getDefault();
+        sms.sendTextMessage("+380673125112", null, msg, sentPI, deliveredPI);
+    }
+//    "+380979330846"
+//    "ivan-korol.m@mail.ru"
+
+    public static void setConfirm( List<Documents> documentses, List<Oil> oils){
+        for(Documents d:documentses) {
+            d.setInform(true);
+            d.saveInBackground();
+        }
+
+        for(Oil o:oils ){
+            o.setInform(true);
+            o.saveInBackground();
+        }
+    }
+
 }

@@ -94,43 +94,53 @@ public class AddTruckFragment extends Fragment implements View.OnClickListener {
 
             documentGCTru = new Documents();
             documentGCTru.setUuidString();
+            documentGCTru.setInform(false);
             documentGCTru.setType(App.GCTru);
 
             documentGCTra = new Documents();
             documentGCTra.setUuidString();
             documentGCTra.setType(App.GCTra);
+            documentGCTra.setInform(false);
 
             documentWSTru = new Documents();
             documentWSTru.setUuidString();
             documentWSTru.setType(App.WSTru);
+            documentWSTru.setInform(false);
 
             documentWSTra = new Documents();
             documentWSTra.setType(App.WSTra);
             documentWSTra.setUuidString();
+            documentWSTra.setInform(false);
 
             documentEPTru = new Documents();
             documentEPTru.setType(App.EPTru);
             documentEPTru.setUuidString();
+            documentEPTru.setInform(false);
 
             documentEPTra = new Documents();
             documentEPTra.setUuidString();
             documentEPTra.setType(App.EPTra);
+            documentEPTra.setInform(false);
 
             documentTACHO = new Documents();
             documentTACHO.setUuidString();
             documentTACHO.setType(App.TACHO);
+            documentTACHO.setInform(false);
 
             documentYSTra = new Documents();
             documentYSTra.setUuidString();
             documentYSTra.setType(App.YSTra);
+            documentYSTra.setInform(false);
 
             documentPOLTru = new Documents();
             documentPOLTru.setUuidString();
             documentPOLTru.setType(App.POLTru);
+            documentPOLTru.setInform(false);
 
             documentPOLTra = new Documents();
             documentPOLTra.setUuidString();
             documentPOLTra.setType(App.POLTra);
+            documentPOLTra.setInform(false);
 
         }
         return root;

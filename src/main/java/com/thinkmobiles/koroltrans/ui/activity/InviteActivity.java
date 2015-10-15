@@ -26,8 +26,9 @@ public class InviteActivity extends AppCompatActivity {
         setContentView(R.layout.activity_invite);
 
         ArrayList<Invite> invites = new ArrayList<>();
-        invites.add(new Invite("AO7555BH","Зелена карта", "18.10.15"));
-        invites.add(new Invite("AO1441AX","Масло", "-"));
+
+        if (getIntent().hasExtra("arrayinvites"))
+            invites = (ArrayList<Invite>) getIntent().getExtras().get("arrayinvites");
 
         listView = (ListView) findViewById(R.id.documentsList);
         listView.setAdapter(new InviteAdapter(this, invites));
