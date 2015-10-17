@@ -119,6 +119,7 @@ public class AllDocumentsActivity extends AppCompatActivity {
             public ParseQuery<Documents> create() {
                 ParseQuery<Documents> query = Documents.getQuery();
                 query.addAscendingOrder("end_date");
+                query.whereNotEqualTo("end_date", 0);
                 query.fromLocalDatastore();
                 return query;
             }

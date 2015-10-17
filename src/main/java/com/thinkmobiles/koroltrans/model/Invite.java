@@ -1,11 +1,14 @@
 package com.thinkmobiles.koroltrans.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.io.Serializable;
 
 /**
  * Created by john on 11.10.15.
  */
-public class Invite implements Serializable{
+public class Invite implements Parcelable{
     String nomer, type, date;
 
     public Invite(String nomer, String type, String date) {
@@ -45,5 +48,37 @@ public class Invite implements Serializable{
     public String toString() {
         return nomer +" " + type + " " +
                  date ;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+
+        dest.writeStringArray(new String[] {this.nomer,
+                this.date,
+                this.type});
+    }
+    public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
+        public Invite createFromParcel(Parcel in) {
+            return new Invite(in);
+        }
+
+        public Invite[] newArray(int size) {
+            return new Invite[size];
+        }
+    };
+
+
+    public Invite(Parcel in){
+        String[] data = new String[3];
+
+        in.readStringArray(data);
+        this.nomer = data[0];
+        this.date = data[1];
+        this.type = data[2];
     }
 }

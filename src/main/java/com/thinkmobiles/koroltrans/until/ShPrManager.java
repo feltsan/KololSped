@@ -19,7 +19,7 @@ public class ShPrManager {
 
     public static boolean getRunService(Context context){
         SharedPreferences preferences = context.getSharedPreferences(AllDocumentsActivity.class.getSimpleName(), Context.MODE_PRIVATE);
-        return  preferences.getBoolean(App.RUN_ID, true);
+        return  preferences.getBoolean(App.RUN_ID, false);
     }
 
     public static void setConfirm(Context context,boolean conf){
@@ -30,5 +30,15 @@ public class ShPrManager {
     public static boolean getConfirm(Context context){
         SharedPreferences preferences = context.getSharedPreferences(InviteActivity.class.getSimpleName(), Context.MODE_PRIVATE);
         return  preferences.getBoolean(App.SER_ID, true);
+    }
+
+    public static void setTempConfirm(Context context,boolean conf){
+        SharedPreferences preferences = context.getSharedPreferences(Sender.class.getSimpleName(), Context.MODE_PRIVATE);
+        preferences.edit().putBoolean(App.TEMP_ID,conf).commit();
+    }
+
+    public static boolean getTempConfirm(Context context){
+        SharedPreferences preferences = context.getSharedPreferences(Sender.class.getSimpleName(), Context.MODE_PRIVATE);
+        return  preferences.getBoolean(App.TEMP_ID, true);
     }
 }

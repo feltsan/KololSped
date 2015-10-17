@@ -20,6 +20,7 @@ import com.thinkmobiles.koroltrans.R;
 import com.thinkmobiles.koroltrans.model.Oil;
 import com.thinkmobiles.koroltrans.model.Reys;
 import com.thinkmobiles.koroltrans.ui.activity.AddActivity;
+import com.thinkmobiles.koroltrans.until.DateHelper;
 
 /**
  * Created by john on 04.10.15.
@@ -58,6 +59,7 @@ public class AddOilFragment extends Fragment implements View.OnClickListener {
         }else {
             oil = new Oil();
             oil.setUuidString();
+            oil.setInform(false);
             oil.setTruck(addActivity.getTruck());
         }
 
@@ -113,7 +115,7 @@ public class AddOilFragment extends Fragment implements View.OnClickListener {
     }
 
     public void saveOil(){
-        oil.setDate(date.getText().toString());
+        oil.setDate(DateHelper.convertStringToLong(date.getText().toString()));
         oil.setDistance(distance.getText().toString());
         oil.setBrend(brend.getText().toString());
         oil.setOilFiter(oilFilter.isChecked());
@@ -132,7 +134,7 @@ public class AddOilFragment extends Fragment implements View.OnClickListener {
     }
 
     private void setEditData() {
-        date.setText(oil.getDate());
+        date.setText(DateHelper.convertLongToString(oil.getDate()));
         distance.setText(oil.getDistance());
         brend.setText(oil.getBrend());
         oilFilter.setChecked(oil.getOilFiter());

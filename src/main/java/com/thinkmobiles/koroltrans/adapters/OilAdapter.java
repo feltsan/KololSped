@@ -16,6 +16,7 @@ import com.thinkmobiles.koroltrans.model.Oil;
 import com.thinkmobiles.koroltrans.model.Reys;
 import com.thinkmobiles.koroltrans.ui.activity.AddActivity;
 import com.thinkmobiles.koroltrans.ui.activity.DetailActivity;
+import com.thinkmobiles.koroltrans.until.DateHelper;
 
 /**
  * Created by john on 04.10.15.
@@ -67,7 +68,7 @@ public class OilAdapter extends ParseQueryAdapter<Oil> {
         TextView service = holder.service;
         RelativeLayout layout = holder.layout;
 
-        date.setText(oil.getDate());
+        date.setText(DateHelper.convertLongToString(oil.getDate()));
         distance.setText(oil.getDistance());
         brend.setText(oil.getBrend());
         oilF.setChecked(oil.getOilFiter());

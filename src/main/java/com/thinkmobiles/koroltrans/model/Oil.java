@@ -23,7 +23,7 @@ public class Oil extends ParseObject implements Serializable {
         super();
     }
 
-    public void setDate(String date){
+    public void setDate(long date){
         put("date", date);
     }
 
@@ -85,8 +85,8 @@ public class Oil extends ParseObject implements Serializable {
         return ParseQuery.getQuery(Oil.class);
     }
 
-    public String getDate(){
-       return getString("date");
+    public long getDate(){
+       return getLong("date");
     }
 
     public String getDistance(){

@@ -2,9 +2,13 @@ package com.thinkmobiles.koroltrans.ui.activity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.net.ConnectivityManager;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.telephony.PhoneStateListener;
+import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -23,6 +27,7 @@ import com.thinkmobiles.koroltrans.R;
 import com.thinkmobiles.koroltrans.adapters.TruckAdapter;
 import com.thinkmobiles.koroltrans.model.Truck;
 import com.thinkmobiles.koroltrans.until.Alarm;
+import com.thinkmobiles.koroltrans.until.ConnectivityChangeReceiver;
 import com.thinkmobiles.koroltrans.until.Sender;
 
 import java.util.ArrayList;
@@ -43,6 +48,7 @@ public class AllTruckActivity extends AppCompatActivity implements View.OnClickL
         findUi();
         setListener();
         setAdapter();
+
 
 
     }
@@ -157,4 +163,6 @@ public class AllTruckActivity extends AppCompatActivity implements View.OnClickL
 
         return super.onOptionsItemSelected(item);
     }
+
+
 }

@@ -16,16 +16,34 @@ import java.util.List;
  */
 public class InviteGetter{
     List<Documents> documentses;
+    List<Oil> oils;
     FindeCallback findeCallback;
+
+    public InviteGetter(FindeCallback findeCallback) {
+        this.findeCallback = findeCallback;
+    }
+
+    public interface FindeCallback {
+        void onTaskCompleted(List<Documents> documentses, List<Oil> oils );
+    }
+
+
+
     public  void getAllDocuments(){
 
         ParseQuery<Documents> query_doc = ParseQuery.getQuery(Documents.class);
         query_doc.whereEqualTo("inform", false);
+        query_doc.whereNotEqualTo("end_date", 0);
         query_doc.fromLocalDatastore();
         query_doc.findInBackground(new FindCallback<Documents>() {
             @Override
             public void done(List<Documents> objects, ParseException e) {
-                documentses =objects;
+                documentses = new ArrayList<>();
+                for (Documents d: objects){
+                    if(d.getEndDate()<=(System.currentTimeMillis()+ App.REMEMBER_DIFF))
+                         documentses.add(d);
+                }
+
                 getAllOils();
             }
         });
@@ -35,11 +53,18 @@ public class InviteGetter{
 
         ParseQuery<Oil> query_doc = ParseQuery.getQuery(Oil.class);
         query_doc.whereEqualTo("inform", false);
+        query_doc.whereNotEqualTo("date", 0);
         query_doc.fromLocalDatastore();
         query_doc.findInBackground(new FindCallback<Oil>() {
             @Override
             public void done(List<Oil> objects, ParseException e) {
-               findeCallback.onTaskCompleted(documentses,objects);
+               oils = new ArrayList<>();
+                for (Oil o: objects){
+                    if(o.getDate() + App.OIL_DIFF>=(System.currentTimeMillis()))
+                        oils.add(o);
+                }
+
+                findeCallback.onTaskCompleted(documentses, oils);
             }
         });
     }

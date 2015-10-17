@@ -60,6 +60,18 @@ public class AddTruckFragment extends Fragment implements View.OnClickListener {
     EditText svidPriceTrailer;
     EditText strachPriceTrailer;
     EditText nomer, trailerNomer;
+    boolean isEdit;
+
+    long GCTru = 0;
+    long GCTra = 0;
+    long WSTru = 0;
+    long WSTra = 0;
+    long EPTru = 0;
+    long EPTra = 0;
+    long TACHO = 0;
+    long YSTra = 0;
+    long POLTru =0;
+    long POLTra =0;
 
 
     Button save, delete;
@@ -80,13 +92,16 @@ public class AddTruckFragment extends Fragment implements View.OnClickListener {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_add_truck, container, false);
+        isEdit = false;
 
         findUI(root);
         setListener();
         if(addActivity.getTruck()!=null) {
             truck = addActivity.getTruck();
+            isEdit = true;
             getDoc();
             setEditData();
+            saveTempDates();
             delete.setVisibility(View.VISIBLE);
         }else{
             truck = new Truck();
@@ -303,6 +318,9 @@ public class AddTruckFragment extends Fragment implements View.OnClickListener {
         documentPOLTra.setPrice(strachPriceTrailer.getText().toString());
         documentPOLTra.setTruck(truck);
 
+        if(isEdit)
+            compare();
+
         documentsList.add(documentGCTru);
         documentsList.add(documentGCTra);
         documentsList.add(documentWSTru);
@@ -351,6 +369,8 @@ public class AddTruckFragment extends Fragment implements View.OnClickListener {
         picker.show(getFragmentManager(), "datePicker");
 
     }
+
+
 
 
     private void setEditData() {
@@ -449,6 +469,50 @@ public class AddTruckFragment extends Fragment implements View.OnClickListener {
     public void deleteTruck(){
         truck.deleteEventually();
         addActivity.finish();
+    }
+
+    public void saveTempDates(){
+        GCTru = documentGCTru.getEndDate();
+        GCTra = documentGCTra.getEndDate();
+        WSTru = documentWSTru.getEndDate();
+        WSTra = documentWSTra.getEndDate();
+        EPTru = documentEPTru.getEndDate();
+        EPTra = documentEPTra.getEndDate();
+        TACHO = documentTACHO.getEndDate();
+        YSTra = documentYSTra.getEndDate();
+        POLTru = documentPOLTru.getEndDate();
+        POLTra = documentPOLTra.getEndDate();
+    }
+    public void compare(){
+        if(GCTru != DateHelper.convertStringToLong(greenCartDateTruck.getText().toString()))
+            documentGCTru.setInform(false);
+
+        if(GCTra != DateHelper.convertStringToLong(greenCartDateTrailer.getText().toString()))
+            documentGCTra.setInform(false);
+
+        if(WSTru != DateHelper.convertStringToLong(certDateTruck.getText().toString()))
+            documentWSTru.setInform(false);
+
+        if(WSTra != DateHelper.convertStringToLong(certDateTrailer.getText().toString()))
+            documentWSTra.setInform(false);
+
+        if(EPTru != DateHelper.convertStringToLong(europackDateTruck.getText().toString()))
+            documentEPTru.setInform(false);
+
+        if(EPTra != DateHelper.convertStringToLong(europackDateTrailer.getText().toString()))
+            documentEPTra.setInform(false);
+
+        if(TACHO != DateHelper.convertStringToLong(tachoDateTruck.getText().toString()))
+            documentTACHO.setInform(false);
+
+        if(YSTra != DateHelper.convertStringToLong(svidDateTrailer.getText().toString()))
+            documentYSTra.setInform(false);
+
+        if(POLTru != DateHelper.convertStringToLong(strachDateTruck.getText().toString()))
+            documentPOLTru.setInform(false);
+
+        if(POLTra != DateHelper.convertStringToLong(strachDateTrailer.getText().toString()))
+            documentPOLTra.setInform(false);
     }
 
 }

@@ -9,6 +9,7 @@ import android.content.IntentFilter;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.telephony.gsm.SmsManager;
+import android.text.Html;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -35,10 +36,10 @@ import javax.mail.internet.MimeMessage;
 public abstract class Sender {
 
 
-    public static void sendSMS1(Context context, String phoneNo, String msg) {
+    public static void sendSMS1(Context context, String msg) {
         try {
             SmsManager smsManager = SmsManager.getDefault();
-            smsManager.sendTextMessage(phoneNo, null, msg, null, null);
+            smsManager.sendTextMessage("+380673125112", null, msg, null, null);
             Toast.makeText(context, "Message Sent",
                     Toast.LENGTH_LONG).show();
         } catch (Exception ex) {
@@ -49,7 +50,7 @@ public abstract class Sender {
         }
     }
 
-    public static void sendEmail(String msg) {
+    public static void sendEmail(String msg, final List<Documents> documentses, final List<Oil> oils) {
         Properties props = new Properties();
         props.put("mail.smtp.host", "smtp.gmail.com");
         props.put("mail.smtp.socketFactory.port", "465");
@@ -66,7 +67,7 @@ public abstract class Sender {
         try {
             final Message message = new MimeMessage(session);
             message.setFrom(new InternetAddress("program.korol@gmail.com"));
-            message.setRecipients(Message.RecipientType.TO, InternetAddress.parse("ivan.feltsan@gmail.com"));
+            message.setRecipients(Message.RecipientType.TO, InternetAddress.parse("ivan-korol.m@mail.ru"));
             message.setSubject("ЗАКІНЧУЄТЬСЯ ТЕРМІН ДІЇ!");
             message.setContent(msg, "text/html; charset=utf-8");
 
@@ -89,17 +90,27 @@ public abstract class Sender {
         }
     }
 
-    public static void sendSMS(final Context context, String msg, final List<Documents> documentses, final List<Oil> oils)
+    public static void sendSMS(final Context context, final String msg, final List<Documents> documentses, final List<Oil> oils)
     {
+        SmsManager sms = SmsManager.getDefault();
 
         String SENT = "SMS_SENT";
         String DELIVERED = "SMS_DELIVERED";
 
-        PendingIntent sentPI = PendingIntent.getBroadcast(context, 0,
+        final PendingIntent sentPI = PendingIntent.getBroadcast(context, 0,
                 new Intent(SENT), 0);
 
-        PendingIntent deliveredPI = PendingIntent.getBroadcast(context, 0,
+        final PendingIntent deliveredPI = PendingIntent.getBroadcast(context, 0,
                 new Intent(DELIVERED), 0);
+
+        final ArrayList<String> smsBodyParts = sms.divideMessage(msg);
+        final ArrayList<PendingIntent> sentPendingIntents = new ArrayList<PendingIntent>();
+        final ArrayList<PendingIntent> deliveredPendingIntents = new ArrayList<PendingIntent>();
+
+        for (int i = 0; i < smsBodyParts.size(); i++) {
+            sentPendingIntents.add(sentPI);
+            deliveredPendingIntents.add(deliveredPI);
+        }
 
         //---when the SMS has been sent---
         context.registerReceiver(new BroadcastReceiver() {
@@ -107,22 +118,27 @@ public abstract class Sender {
             public void onReceive(Context arg0, Intent arg1) {
                 switch (getResultCode()) {
                     case Activity.RESULT_OK:
+
                         Toast.makeText(context, "SMS sent",
                                 Toast.LENGTH_SHORT).show();
                         break;
                     case SmsManager.RESULT_ERROR_GENERIC_FAILURE:
+                        notConfirmation(context);
                         Toast.makeText(context, "Generic failure",
                                 Toast.LENGTH_SHORT).show();
                         break;
                     case SmsManager.RESULT_ERROR_NO_SERVICE:
+                        notConfirmation(context);
                         Toast.makeText(context, "No service",
                                 Toast.LENGTH_SHORT).show();
                         break;
                     case SmsManager.RESULT_ERROR_NULL_PDU:
+                        notConfirmation(context);
                         Toast.makeText(context, "Null PDU",
                                 Toast.LENGTH_SHORT).show();
                         break;
                     case SmsManager.RESULT_ERROR_RADIO_OFF:
+                        notConfirmation(context);
                         Toast.makeText(context, "Radio off",
                                 Toast.LENGTH_SHORT).show();
                         break;
@@ -136,11 +152,12 @@ public abstract class Sender {
             public void onReceive(Context arg0, Intent arg1) {
                 switch (getResultCode()) {
                     case Activity.RESULT_OK:
-                       setConfirm(documentses, oils);
+                        setConfirm(documentses, oils);
                         Toast.makeText(context, "SMS delivered",
                                 Toast.LENGTH_SHORT).show();
                         break;
                     case Activity.RESULT_CANCELED:
+                        notConfirmation(context);
                         Toast.makeText(context, "SMS not delivered",
                                 Toast.LENGTH_SHORT).show();
                         break;
@@ -148,8 +165,9 @@ public abstract class Sender {
             }
         }, new IntentFilter(DELIVERED));
 
-        SmsManager sms = SmsManager.getDefault();
-        sms.sendTextMessage("+380673125112", null, msg, sentPI, deliveredPI);
+        sms.sendMultipartTextMessage("+380979330846", null, smsBodyParts, sentPendingIntents, deliveredPendingIntents);
+
+
     }
 //    "+380979330846"
 //    "ivan-korol.m@mail.ru"
@@ -164,6 +182,10 @@ public abstract class Sender {
             o.setInform(true);
             o.saveInBackground();
         }
+    }
+
+    public static void notConfirmation(Context context){
+        ShPrManager.setConfirm(context,false);
     }
 
 }

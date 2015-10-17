@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.thinkmobiles.koroltrans" >
+
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.SEND_SMS" />
@@ -46,8 +48,6 @@
             android:theme="@style/Theme.AppCompat"
             android:parentActivityName=".ui.activity.AllTruckActivity"/>
 
-
-
         <receiver
             android:name=".until.BootReceiver"
             android:exported="true">
@@ -56,10 +56,24 @@
             </intent-filter>
         </receiver>
 
+        <receiver
+            android:name=".until.ConnectivityChangeReceiver"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.SERVICE_STATE"/>
+            </intent-filter>
+        </receiver>
+
         <service
             android:name=".until.RememberService"
             android:exported="false"/>
-        <receiver android:process=":remote" android:name=".until.Alarm"></receiver>
+        <service
+            android:name=".until.GetInvites"
+            android:exported="false">
+        </service>
+        <receiver android:process=":remote" android:name=".until.Alarm">>
+
+        </receiver>
     </application>
 
 </manifest>
