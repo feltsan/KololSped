@@ -43,9 +43,6 @@ public class Alarm extends BroadcastReceiver{
 
         context.startService(new Intent(context, GetInvites.class));
 
-        Toast.makeText(context, "Alarm !!!!!!!!!!", Toast.LENGTH_LONG).show();
-        Log.e("ALARM", "ALARM");// For example
-
         wl.release();
     }
 
