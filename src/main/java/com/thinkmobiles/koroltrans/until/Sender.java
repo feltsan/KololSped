@@ -118,7 +118,7 @@ public abstract class Sender {
             public void onReceive(Context arg0, Intent arg1) {
                 switch (getResultCode()) {
                     case Activity.RESULT_OK:
-
+                        setConfirm(documentses, oils);
                         Toast.makeText(context, "SMS sent",
                                 Toast.LENGTH_SHORT).show();
                         break;
