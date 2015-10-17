@@ -43,6 +43,7 @@ public class Alarm extends BroadcastReceiver{
 
         context.startService(new Intent(context, GetInvites.class));
 
+        Toast.makeText(context,"Перевірено!", Toast.LENGTH_SHORT).show();
         wl.release();
     }
 
