@@ -1,10 +1,12 @@
 package com.thinkmobiles.koroltrans.adapters;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.thinkmobiles.koroltrans.R;
@@ -54,7 +56,7 @@ public class InviteAdapter extends BaseAdapter {
             viewHolder = (ViewHolder) convertView.getTag();
         }
 
-        viewHolder.updateView(getItem(position));
+        viewHolder.updateView(getItem(position),context);
 
         return convertView;
     }
@@ -62,6 +64,7 @@ public class InviteAdapter extends BaseAdapter {
 
     private static class ViewHolder {
         TextView nomer, date, type;
+        RelativeLayout background;
 
 
         public ViewHolder(final View _convertView) {
@@ -73,12 +76,50 @@ public class InviteAdapter extends BaseAdapter {
             nomer = (TextView) _convertView.findViewById(R.id.nomer);
             date = (TextView) _convertView.findViewById(R.id.date);
             type = (TextView) _convertView.findViewById(R.id.type);
+            background = (RelativeLayout) _convertView.findViewById(R.id.background);
         }
 
-        public final void updateView(final Invite invite) {
+        public final void updateView(final Invite invite, Context context) {
             nomer.setText(invite.getNomer());
             date.setText(invite.getDate());
-            type.setText(invite.getType());
+
+            switch (invite.getType()){
+                case "Зелена карта":
+                    background.setBackgroundColor(context.getResources().getColor(android.R.color.holo_green_dark));
+                    type.setBackgroundColor(context.getResources().getColor(android.R.color.holo_green_dark));
+                    type.setText("Карта");
+                break;
+                case "Сертифікат":
+                    background.setBackgroundColor(context.getResources().getColor(android.R.color.white));
+                    type.setBackgroundColor(context.getResources().getColor(android.R.color.white));
+                    type.setText("Cертиф.");
+                    break;
+                case "Європротокол":
+                    background.setBackgroundColor(context.getResources().getColor(android.R.color.white));
+                    type.setBackgroundDrawable(context.getResources().getDrawable(R.drawable.eu));
+                    type.setText("");
+                    break;
+                case "Тахограф":
+                    background.setBackgroundColor(context.getResources().getColor(android.R.color.white));
+                    type.setBackgroundDrawable(context.getResources().getDrawable(R.drawable.ta));
+                    type.setText("");
+                    break;
+                case "Жовте свідоцтво":
+                    background.setBackgroundColor(Color.parseColor("#fff100"));
+                    type.setBackgroundColor(Color.parseColor("#fff100"));
+                    type.setText("Свід.");
+                    break;
+                case "Страховка":
+                    background.setBackgroundColor(context.getResources().getColor(android.R.color.white));
+                    type.setBackgroundDrawable(context.getResources().getDrawable(R.drawable.stra));
+                    type.setText("");
+                    break;
+                case "Масло":
+                    background.setBackgroundColor(context.getResources().getColor(android.R.color.white));
+                    type.setBackgroundDrawable(context.getResources().getDrawable(R.drawable.oil));
+                    type.setText("");
+                    break;
+            }
         }
     }
 }

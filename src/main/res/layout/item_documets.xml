@@ -30,7 +30,7 @@
                 android:layout_gravity="center"
                 android:layout_marginBottom="1px"
                 android:layout_marginRight="1px"
-                android:textSize="14dp"
+                android:textSize="20dp"
                 android:text="номер"
                 android:paddingTop="10dp"
                 android:paddingBottom="10dp"
@@ -38,7 +38,8 @@
                 android:layout_weight="1"
                 android:background="@android:color/white"
                 android:gravity="center"
-                android:textColor="@android:color/black" />
+                android:textColor="@android:color/black"
+                android:textStyle="bold" />
 
 
 
@@ -82,7 +83,7 @@
                 android:layout_gravity="center"
                 android:layout_marginBottom="1px"
                 android:layout_marginRight="1px"
-                android:textSize="14dp"
+                android:textSize="20dp"
                 android:text="Дата"
                 android:paddingTop="10dp"
                 android:paddingBottom="10dp"
@@ -90,7 +91,8 @@
                 android:background="@android:color/white"
                 android:gravity="center"
                 android:textColor="@android:color/black"
-                android:singleLine="false" />
+                android:singleLine="false"
+                android:textStyle="bold" />
 
 
 
